@@ -26,7 +26,6 @@ add_de1_widget "iconik_settings" checkbutton 160 840 {} -text [translate "Replac
 add_de1_text iconik_settings 180 900 -text [translate "Screensaver folder"] -font $::font_tiny -width 300 -fill [theme background_text] -anchor "nw"
 # The actual content. Here a list of all settings for this plugin
 add_de1_widget "iconik_settings" entry 180 960  {
-    set ::globals(widget_profile_name_to_save) $widget
     bind $widget <Return> { say [translate {save}] $::settings(sound_button_in); borg toast [translate "Saved"]; iconik_save_settings; hide_android_keyboard}
     bind $widget <Leave> hide_android_keyboard
 } -width [expr {int(38 * $::globals(entry_length_multiplier))}] -font $::font_tiny  -borderwidth 1 -bg [theme background_highlight]  -foreground [theme background_text] -textvariable ::iconik_settings(saver_dir) -relief flat  -highlightthickness 1 -highlightcolor [theme button_text_light]
