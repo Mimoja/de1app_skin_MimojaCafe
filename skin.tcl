@@ -214,9 +214,9 @@ proc iconik_save_cleaning_profile {} {
 	borg toast [translate "Saved in as cleaning profile"]
 }
 
-register_state_change_handler "Idle" "HotWaterRinse" timout_flush
-register_state_change_handler "Espresso" "Idle" iconik_after_espresso
-register_state_change_handler "Idle" "Espresso" iconik_before_espresso
+register_state_change_handler "Idle" "HotWaterRinse" ::timout_flush
+register_state_change_handler "Espresso" "Idle" ::iconik_after_espresso
+register_state_change_handler "Idle" "Espresso" ::iconik_before_espresso
 
 proc iconik_show_settings {} {
 	if {$::settings(settings_profile_type) == "settings_2c2" || $::settings(settings_profile_type) == "settings_2c"} {

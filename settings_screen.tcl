@@ -1,5 +1,5 @@
 
-set ::version_string "Version 1.3"
+set ::version_string "Version 1.4"
 
 add_background "iconik_settings"
 
