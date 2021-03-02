@@ -84,7 +84,7 @@ proc iconik_get_status_text {} {
 			return [translate "Ready"]
 		}
 		1 {
-			return [translate "Heating\n[group_head_heater_temperature_text]"]
+			return [translate "Heating"]\n[group_head_heater_temperature_text]
 		}
 		3 {
 			return [translate "Stabilising"]
