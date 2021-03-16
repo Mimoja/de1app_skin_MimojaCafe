@@ -170,12 +170,10 @@ add_de1_widget "history" graph 680 240 {
 
 	$widget element create line_history_state_change -xdata history_elapsed -ydata history_state_change -label "" -linewidth [rescale_x_skin 6] -color #AAAAAA  -pixels 0 ;
 
-	$widget element create line_history_resistance_weight  -xdata history_elapsed -ydata history_resistance_weight -symbol none -label "" -linewidth [rescale_x_skin 4] -color #e5e500 -smooth $::settings(live_graph_smoothing_technique) -pixels 0
 	$widget element create line_history_resistance  -xdata history_elapsed -ydata history_resistance -symbol none -label "" -linewidth [rescale_x_skin 4] -color #e5e500 -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes {6 2};
 
 	$widget element create line_history_delta_pressure -xdata history_elapsed -ydata history_pressure_delta -symbol none -label "" -linewidth [rescale_x_skin 4] -color #e5e500 -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes {6 2};
 	$widget element create line_history_delta_flow  -xdata history_elapsed -ydata history_flow_delta_negative -symbol none -label "" -linewidth [rescale_x_skin 4] -color #e5e500 -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes {6 2};
-	$widget element create line_history_delta_flow_2x  -xdata history_elapsed -ydata history_flow_delta_negative_2x -symbol none -label "" -linewidth [rescale_x_skin 4] -color #e5e500 -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes {6 2};
 
 	$widget axis configure x -color [theme background_text] -tickfont Helv_7 -min 0.0;
 	$widget axis configure y -color [theme background_text] -tickfont Helv_7 -min 0.0 -max 12 -subdivisions 5 -majorticks {0 1 2 3 4 5 6 7 8 9 10 11 12}  -hide 0;
