@@ -149,7 +149,7 @@ array set ::iconik_settings {
 
     max_history_items 100
 
-    use_community_ui 0
+    ui "default"
 }
 
 proc theme {cntx} {
