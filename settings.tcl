@@ -114,6 +114,9 @@ array set ::cocoa_theme {
 set ::font_tiny [get_font "Mazzard Regular" 16]
 set ::font_small [get_font "Mazzard Regular" 18]
 set ::font_big [get_font "Mazzard Regular" 22]
+set ::font_tiny_icon [get_font "Font Awesome 5 Free-Solid-900" 16]
+set ::font_small_icon [get_font "Font Awesome 5 Free-Solid-900" 18]
+set ::font_big_icon [get_font "Font Awesome 5 Free-Solid-900" 22]
 
 array set ::iconik_settings {
     profiles {1 {name default title Default} 2 {name {Gentle and sweet} title {Gentle and sweet}} 3 {name rao_allonge title {Rao Allongé}} 4 {name {Classic Italian espresso} title {Classic Italian espresso}} 5 {name {Blooming espresso} title {Blooming Espresso}}}
@@ -134,7 +137,10 @@ array set ::iconik_settings {
     show_ghc_buttons 0
     steam_presets_enabled 1
     show_grinder_settings_on_main_page 0
-
+    show_clock_on_main_page 0
+    small_mug_setting 0
+    large_mug_setting 0
+    
     saver_dir {/saver}
 
     show_water_level_indicator 0
@@ -142,6 +148,8 @@ array set ::iconik_settings {
     water_temperature_overwride 95
 
     max_history_items 100
+
+    use_community_ui 0
 }
 
 proc theme {cntx} {

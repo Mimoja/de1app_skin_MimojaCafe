@@ -6,13 +6,18 @@ set ::skindebug 0
 set ::debugging 0
 set ::history_to_restore_after_cleanup {}
 
+
 source "[skin_directory]/settings.tcl"
 
 iconik_load_settings
 iconik_save_settings
 
+set ::version_string "Version 1.5-$::iconik_settings(ui)"
+
 source "[skin_directory]/framework.tcl"
-source "[skin_directory]/ui.tcl"
+
+source "[skin_directory]/interfaces/$::iconik_settings(ui)_ui.tcl"
+
 
 create_grid
 .can itemconfigure "grid" -state "hidden"

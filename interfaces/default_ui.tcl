@@ -43,7 +43,7 @@ source "[skin_directory]/history_viewer.tcl"
 
 # Settings Page
 
-source "[skin_directory]/settings_screen.tcl"
+source "[skin_directory]/interfaces/default_settings_screen.tcl"
 
 
 # Return from screensaver
