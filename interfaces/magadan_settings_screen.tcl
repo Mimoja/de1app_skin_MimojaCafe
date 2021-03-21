@@ -54,6 +54,7 @@ create_button "iconik_settings" 2060 520 2260 700 $::font_big $::red_theme(butto
 add_de1_text  "iconik_settings" 1800 760 -text "UI:" -anchor center -justify center -font $::font_small -fill [theme background_text]
 create_button "iconik_settings" 1800 820 2000 1020 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::iconik_settings(ui) "default"; iconik_save_settings; borg toast "UI changed, please restart"} "Default" 
 create_button "iconik_settings" 2060 820 2260 1020 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::iconik_settings(ui) "magadan"; iconik_save_settings; borg toast "UI changed, please restart"} "Magadan"
+create_button "iconik_settings" 2320 820 2520 1020 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::iconik_settings(ui) "silas"; iconik_save_settings; borg toast "UI changed, please restart"} "Silas"
 
 # System Settings button
 create_button "iconik_settings" 2080 1440 2480 1560 $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_save_settings; iconik_show_settings} {[translate "System Settings"] }
