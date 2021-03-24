@@ -36,6 +36,29 @@ proc iconik_steam_timeout {slot} {
 	return [dict get $::iconik_settings(steam_profiles) $slot timeout]
 }
 
+set ::active_button_indicator {___________________________}
+
+proc is_coffee_chosen { slot } {
+	if {$::settings(profile_title) == [iconik_profile_title $slot]} {
+		return $::active_button_indicator
+	} else {
+		return {}
+	}
+}
+
+proc is_steam_chosen { slot } {
+	if {$::settings(steam_timeout) == [iconik_steam_timeout $slot]} {
+		return $::active_button_indicator
+	} else {
+		return {}
+	}
+}
+
+proc create_active_marker { x1 y1 x2 y2 textvariable } {
+	add_de1_variable "off"  [expr ($x1 + $x2) / 2.0 ] [expr (($y1 + $y2) / 2.0) + 80 ] -width [rescale_x_skin [expr ($x2 - $x1) - 20]]  -text "" -font $::font_tiny -fill [theme button_text_light] -anchor "center" -justify "center" -state "hidden" -textvariable $textvariable
+}
+
+
 # History Page
 
 source "[skin_directory]/history_viewer.tcl"
@@ -148,20 +171,25 @@ if {$::iconik_settings(show_ml_instead_of_water_level) == 1} {
 
 ## Coffee
 create_button "off" 80 1140 480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 1} {[iconik_profile_title 1]}
+create_active_marker 80 1140 480 1380 {[is_coffee_chosen 1]}
 create_button "off" 580 1140 980 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 2} {[iconik_profile_title 2]}
-#add_de1_variable "$::DSx_home_pages" 420 1450 -justify center -anchor "s" -text "" -font [DSx_font notosansuiregular 24] -fill $::DSx_settings(pink) -textvariable {_________________________}
+create_active_marker 580 1140 980 1380 {[is_coffee_chosen 2]}
 create_button "off" 1080 1140 1480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 3} {[iconik_profile_title 3]}
+create_active_marker 1080 1140 1480 1380 {[is_coffee_chosen 3]}
 
 
 if {$::iconik_settings(steam_presets_enabled) == 1} {
 	## Steam Presets
 	create_button "off" 1580 1140 1980 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_steam_settings 1} {Steam 1:\n[iconik_steam_timeout 1]s}
+	create_active_marker 1580 1140 1980 1380 {[is_steam_chosen 1]}
 	create_button "off" 2080 1140 2480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_steam_settings 2} {Steam 2:\n[iconik_steam_timeout 2]s} 
-
+	create_active_marker 2080 1140 2480 1380 {[is_steam_chosen 2]}
 } else {
 	# Two more coffee presets
 	create_button "off"  1580 1140 1980 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 4} {[iconik_profile_title 4]}
+	create_active_marker 1580 1140 1980 1380 {[is_coffee_chosen 4]}
 	create_button "off" 2080 1140 2480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 5} {[iconik_profile_title 5]}
+	create_active_marker 2080 1140 2480 1380 {[is_coffee_chosen 5]}
 }
 
 ## Bottom buttons
@@ -273,15 +301,6 @@ add_de1_widget "off" graph 580 230 {
 	# $widget element create line_espresso_de1_explanation_chart_temp -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_temperature_10  -label "" -linewidth [rescale_x_skin 15] -color #ff888c  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0; 
 
 } -plotbackground [theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin $espresso_graph_height] -borderwidth 1 -background [theme background] -plotrelief flat -plotpady 0 -plotpadx 10
-
- proc map {fun list} {
-    set res {}
-    foreach element $list {lappend res [$fun $element]}
-    set res
- }
-
- proc addTax x {expr {$x/10}}   
-
 
 if {$::iconik_settings(show_steam) == 1} {
 	add_de1_widget "off" graph 580 830 {
