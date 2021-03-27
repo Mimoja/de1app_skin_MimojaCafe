@@ -72,7 +72,7 @@ proc iconik_get_status_text {} {
 		return  [translate "Scale reconnecting"]
 	}
 
-	if {! [::device::scale::is_connected]} {
+	if { [::device::scale::expecting_present] && ![::device::scale::is_connected]} {
 		return [translate "Scale disconnected.\nTap here"]
 	}
 
