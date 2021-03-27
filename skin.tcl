@@ -12,7 +12,7 @@ source "[skin_directory]/settings.tcl"
 iconik_load_settings
 iconik_save_settings
 
-set ::version_string "Version 1.5-$::iconik_settings(ui)"
+set ::version_string "Version 1.5.1-$::iconik_settings(ui)"
 
 source "[skin_directory]/framework.tcl"
 
@@ -62,7 +62,6 @@ proc iconik_toggle_cleaning {} {
 }
 
 proc is_connected {} {return [expr {[clock seconds] - $::de1(last_ping)} < 5]}
-proc is_scale_disconnected {} {return [expr $::de1(scale_device_handle) == 0 && $::settings(scale_bluetooth_address) != ""]}
 
 proc iconik_get_status_text {} {
 	if {[is_connected] != 1} {
@@ -73,7 +72,7 @@ proc iconik_get_status_text {} {
 		return  [translate "Scale reconnecting"]
 	}
 
-	if {$::de1(scale_device_handle) == 0 && $::settings(scale_bluetooth_address) != ""} {
+	if {! [::device::scale::is_connected]} {
 		return [translate "Scale disconnected.\nTap here"]
 	}
 
@@ -82,7 +81,7 @@ proc iconik_get_status_text {} {
 			return [translate "Starting"]
 		}
 		0 {
-			if {$::settings(scale_bluetooth_address) != ""} {
+			if {[::device::scale::is_connected]} {
 				return [translate "Ready\nScale connected"]
 			}
 
@@ -296,12 +295,12 @@ proc iconik_get_ratio_text {} {
 proc iconik_get_final_weight_text {} {
 	set target [iconik_final_weight]
 
-	set current ""
-	if {$::de1(scale_device_handle) != 0 && $::settings(scale_bluetooth_address) != ""} {
-		set current "$::de1(scale_weight) / "
+	set current "$target"
+	if {[::device::scale::is_connected]} {
+		set current "$::de1(scale_weight) / $current"
 	}
 
-	return "$current$target"
+	return $current
 }
 
 proc iconik_is_cleanup {} { return [ expr { $::iconik_settings(cleanup_profile) == $::settings(profile_filename) } ] }
