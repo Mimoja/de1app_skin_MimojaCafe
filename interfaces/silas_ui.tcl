@@ -14,18 +14,66 @@ proc iconik_water_temperature {} {
 	return "$temp °C"
 }
 
+proc profile_file {} {
+	return "[homedir]/profiles/${::settings(profile_filename)}.tcl"
+}
+
+proc profile_backup_file {} {
+	return "[profile_file].orig"
+}
+
+proc profile_backup_exists {} {
+	set origfn [profile_backup_file]
+	return [file exists $origfn]
+}
+
+proc backup_profile {} {
+	if {![profile_backup_exists]} {
+		file copy -force [profile_file] [profile_backup_file]
+		borg toast [translate "Original profile backed up"]
+	}
+}
+
+proc is_advanced_profile {} {
+	return [expr {$::settings(settings_profile_type) == "settings_2c2" || $::settings(settings_profile_type) == "settings_2c"}]
+}
+
+proc restore_profile {} {
+	if {[profile_backup_exists]} {
+		file copy -force [profile_backup_file] [profile_file] 
+		file delete [profile_backup_file]
+		
+		select_profile $::settings(profile)
+		if {[is_advanced_profile]} {
+			fill_advanced_profile_steps_listbox
+		}
+		borg toast [translate "Original profile restored"]
+	}
+}
+
 proc iconik_expresso_temperature {} {
-	if {$::settings(settings_profile_type) == "settings_2c2" || $::settings(settings_profile_type) == "settings_2c"} {
+	set profile_changed_indicator ""
+	
+	if {[profile_backup_exists]} {
+		set profile_changed_indicator " *"
+	}
+
+	if {[is_advanced_profile]} {
 		set val $::current_adv_step(temperature)
 	} else {
 		set val $::settings(espresso_temperature)
 	}
 	if {$::settings(enable_fahrenheit) == 1} {
 		set temp [round_to_one_digits [celsius_to_fahrenheit $val]]
-		return "$temp F"
+		return "$temp F$profile_changed_indicator"
 	}
 	set temp [round_to_one_digits $val]
-	return "$temp °C"
+	return "$temp °C$profile_changed_indicator"
+}
+
+proc wrap_temperature_adjust {args} {
+	backup_profile
+	iconik_temperature_adjust $args
 }
 
 proc iconik_profile_title {slot} {
@@ -108,7 +156,19 @@ rectangle "off" 0 0 2560 180 [theme background_highlight]
 create_settings_button "off" 80 30 480 150 $::font_tiny [theme button_secondary] [theme button_text_light]  {set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) - 0.5}]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) + 0.5}]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
 
 ## Espresso Temperature
-create_settings_button "off" 580 30 980 150 $::font_tiny [theme button_secondary] [theme button_text_light] {iconik_temperature_adjust down} {iconik_temperature_adjust up} {Temp:\n [iconik_expresso_temperature]}
+proc create_triple_button { contexts x1 y1 x2 y2 font backcolor textcolor action_down action_middle action_up variable} {
+	rounded_rectangle $contexts  $x1 $y1 $x2 $y2 [rescale_x_skin 80] $backcolor
+
+	add_de1_text $contexts [expr ($x1 + 40)] [expr ($y1 + $y2) / 2.0 ] -text "-" -font $font -fill $textcolor -anchor "center" -state "hidden"
+	add_de1_text $contexts [expr ($x2 - 40) ] [expr ($y1 + $y2) / 2.0 ] -text "+" -font $font -fill $textcolor -anchor "center" -state "hidden"
+	add_de1_variable "$contexts" [expr ($x1 + $x2) / 2.0 ] [expr ($y1 + $y2) / 2.0 ] -width [expr ($x2 - $x1) - 80]  -text "" -font $font -fill $textcolor -anchor "center" -justify "center" -state "hidden" -textvariable $variable
+	set one_third_width {($x2 - $x1) / 3.0}
+	add_de1_button $contexts $action_down $x1 $y1 [expr $x1 + $one_third_width] $y2
+	add_de1_button $contexts $action_middle [expr $x1 + $one_third_width] $y1 [expr $x2 - $one_third_width] $y2
+	add_de1_button $contexts $action_up [expr $x2 - $one_third_width] $y1 $x2 $y2
+}
+
+create_triple_button "off" 580 30 980 150 $::font_tiny [theme button_secondary] [theme button_text_light] {wrap_temperature_adjust down} {restore_profile} {wrap_temperature_adjust up} {Temp:\n [iconik_expresso_temperature]}
 
 ## Espresso Target Weight
 create_settings_button "off" 1080 30 1480 150 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) - 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) - 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) + 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) + 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Bev. weight:\n [iconik_get_final_weight_text]g}
