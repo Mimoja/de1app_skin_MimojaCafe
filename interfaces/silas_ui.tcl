@@ -259,8 +259,18 @@ if {$::iconik_settings(steam_presets_enabled) == 1} {
 
 rectangle "off" 0 1410 2560 1600 [theme background_highlight]
 
+proc wrap_status_text {} {
+	set statustext [iconik_get_status_text]
+	set heatingtext [translate "Heating"]
+	if {[string match "$heatingtext*" $statustext]} { 
+		return $heatingtext
+	} else {
+		return $statustext
+	}
+}
+
 ## Status and MISC buttons
-create_button "off" 80 1440 480 1560    $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_status_tap } {[iconik_get_status_text]}
+create_button "off" 80 1440 480 1560    $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_status_tap } {[wrap_status_text]}
 create_button "off" 580 1440 980 1560   $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_history_page} {[translate "History"]}
 create_button "off" 1080 1440 1480 1560 $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_toggle_cleaning } { [translate "Clean"]} 
 create_button "off" 1580 1440 1980 1560 $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_select_profile } {[translate "Settings"]}
