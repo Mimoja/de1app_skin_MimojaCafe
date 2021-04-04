@@ -45,11 +45,11 @@ create_settings_button "iconik_settings" 1180  1260 1580 1380 $::font_tiny [them
 
 
 # Skin theme buttons
-create_button "iconik_settings" 1800  40 2000 220 $::font_big $::default_theme(button) $::default_theme(button_text_light) {set ::iconik_settings(theme) "::default_theme"; iconik_save_settings; borg toast "Theme changed, please restart"}  "Default" 
-create_button "iconik_settings" 1800 280 2000 460 $::font_big $::dark_theme(button)    $::dark_theme(button_text_light)    {set ::iconik_settings(theme) "::dark_theme";    iconik_save_settings; borg toast "Theme changed, please restart"} "Dark" 
-create_button "iconik_settings" 2060 280 2260 460 $::font_big $::cocoa_theme(button)   $::cocoa_theme(button_text_light)   {set ::iconik_settings(theme) "::cocoa_theme";   iconik_save_settings; borg toast "Theme changed, please restart"}  "Cocoa"
-create_button "iconik_settings" 1800 520 2000 700 $::font_big $::purple_theme(button)  $::purple_theme(button_text_light)  {set ::iconik_settings(theme) "::purple_theme";  iconik_save_settings; borg toast "Theme changed, please restart"} "Purple" 
-create_button "iconik_settings" 2060 520 2260 700 $::font_big $::red_theme(button)     $::red_theme(button_text_light)     {set ::iconik_settings(theme) "::red_theme";     iconik_save_settings; borg toast "Theme changed, please restart"} "Red"  
+create_button "iconik_settings" 1800  40 2000 220 $::font_tiny $::default_theme(button) $::default_theme(button_text_light) {set ::iconik_settings(theme) "::default_theme"; iconik_save_settings; borg toast "Theme changed, please restart"}  "Default" 
+create_button "iconik_settings" 1800 280 2000 460 $::font_tiny $::dark_theme(button)    $::dark_theme(button_text_light)    {set ::iconik_settings(theme) "::dark_theme";    iconik_save_settings; borg toast "Theme changed, please restart"} "Dark" 
+create_button "iconik_settings" 2060 280 2260 460 $::font_tiny $::cocoa_theme(button)   $::cocoa_theme(button_text_light)   {set ::iconik_settings(theme) "::cocoa_theme";   iconik_save_settings; borg toast "Theme changed, please restart"}  "Cocoa"
+create_button "iconik_settings" 1800 520 2000 700 $::font_tiny $::purple_theme(button)  $::purple_theme(button_text_light)  {set ::iconik_settings(theme) "::purple_theme";  iconik_save_settings; borg toast "Theme changed, please restart"} "Purple" 
+create_button "iconik_settings" 2060 520 2260 700 $::font_tiny $::red_theme(button)     $::red_theme(button_text_light)     {set ::iconik_settings(theme) "::red_theme";     iconik_save_settings; borg toast "Theme changed, please restart"} "Red"  
 
 add_de1_text  "iconik_settings" 1800 760 -text "UI:" -anchor center -justify center -font $::font_small -fill [theme background_text]
 create_button "iconik_settings" 1800 820 2000 1020 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::iconik_settings(ui) "default"; iconik_save_settings; borg toast "UI changed, please restart"} "Default" 
