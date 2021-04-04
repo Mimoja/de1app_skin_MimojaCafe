@@ -61,21 +61,21 @@ if {$::iconik_settings(show_water_level_indicator) == 1} {
 
 
 # Profile QuickSettings
-create_button "settings_1" 80 1460 200 1580  $::font_big [theme button] [theme button_text_light] {iconik_save_profile 1} "1"
-create_button "settings_1" 220 1460 340 1580  $::font_big [theme button] [theme button_text_light] {iconik_save_profile 2} "2"
-create_button "settings_1" 360 1460 480 1580 $::font_big [theme button] [theme button_text_light] {iconik_save_profile 3}  "3"
+create_button "settings_1" 80 1460 200 1580  $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 1} "1"
+create_button "settings_1" 220 1460 340 1580  $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 2} "2"
+create_button "settings_1" 360 1460 480 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 3}  "3"
 
 if {$::iconik_settings(steam_presets_enabled) == 0} {
-	create_button "settings_1" 500 1460 620 1580 $::font_big [theme button] [theme button_text_light] {iconik_save_profile 4} "4" 
-	create_button "settings_1" 640 1460 760 1580 $::font_big [theme button] [theme button_text_light] {iconik_save_profile 5} "5" 
+	create_button "settings_1" 500 1460 620 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 4} "4" 
+	create_button "settings_1" 640 1460 760 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 5} "5" 
 }
 
 if {$::iconik_settings(cleanup_use_profile) == 1} {
-	create_button "settings_1" 780 1460 940 1580 $::font_big [theme button] [theme button_text_light] {iconik_save_cleaning_profile} "Clean"
+	create_button "settings_1" 780 1460 940 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_cleaning_profile} "Clean"
 }
 
 # Skin settings buttons
-create_button "settings_1 settings_2 settings_2a settings_2b settings_2c settings_2c2 settings_3 settings_4" 1080 1460 1480 1580 $::font_big [theme button] [theme button_text_light] { page_to_show_when_off "iconik_settings"} "Skin Settings" 
+create_button "settings_1 settings_2 settings_2a settings_2b settings_2c settings_2c2 settings_3 settings_4" 1080 1460 1480 1580 $::font_tiny [theme button] [theme button_text_light] { page_to_show_when_off "iconik_settings"} "Skin Settings" 
 
 # Upper buttons
 ## Background
