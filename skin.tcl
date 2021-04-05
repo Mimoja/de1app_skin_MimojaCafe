@@ -6,6 +6,7 @@ set ::skindebug 0
 set ::debugging 0
 set ::history_to_restore_after_cleanup {}
 
+namespace eval ::skin::mimojacafe::graph {}
 
 source "[skin_directory]/settings.tcl"
 
