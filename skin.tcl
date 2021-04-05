@@ -232,6 +232,7 @@ proc iconik_show_settings {} {
 proc iconik_select_profile {} {
 	fill_profiles_listbox
 	show_settings settings_1;
+	set_profiles_scrollbar_dimensions
 }
 
 set ::iconik_max_pressure 0
