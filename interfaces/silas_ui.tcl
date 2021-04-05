@@ -38,16 +38,21 @@ proc is_advanced_profile {} {
 	return [expr {$::settings(settings_profile_type) == "settings_2c2" || $::settings(settings_profile_type) == "settings_2c"}]
 }
 
+set ::origprofilefile {}
 proc restore_profile {} {
 	if {[profile_backup_exists]} {
 		file copy -force [profile_backup_file] [profile_file] 
 		file delete [profile_backup_file]
-		
-		select_profile $::settings(profile)
-		if {[is_advanced_profile]} {
-			fill_advanced_profile_steps_listbox
+
+		set ::origprofilefile $::settings(profile_filename)
+		select_profile "default"
+		after 100 {
+			select_profile $::origprofilefile
+			if {[is_advanced_profile]} {
+				fill_advanced_profile_steps_listbox
+			}
+			borg toast [translate "Original profile restored"]
 		}
-		borg toast [translate "Original profile restored"]
 	}
 }
 
