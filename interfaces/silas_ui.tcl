@@ -102,9 +102,6 @@ proc is_steam_chosen { slot } {
 	}
 }
 
-proc create_active_marker { x1 y1 x2 y2 textvariable } {
-	add_de1_variable "off"  [expr ($x1 + $x2) / 2.0 ] [expr (($y1 + $y2) / 2.0) + 80 ] -width [rescale_x_skin [expr ($x2 - $x1) - 20]]  -text "" -font $::font_tiny -fill [theme button_text_light] -anchor "center" -justify "center" -state "hidden" -textvariable $textvariable
-}
 
 
 # History Page
@@ -156,18 +153,6 @@ rectangle "off" 0 0 2560 180 [theme background_highlight]
 create_settings_button "off" 80 30 480 150 $::font_tiny [theme button_secondary] [theme button_text_light]  {set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) - 0.5}]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) + 0.5}]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
 
 ## Espresso Temperature
-proc create_triple_button { contexts x1 y1 x2 y2 font backcolor textcolor action_down action_middle action_up variable} {
-	rounded_rectangle $contexts  $x1 $y1 $x2 $y2 [rescale_x_skin 80] $backcolor
-
-	add_de1_text $contexts [expr ($x1 + 40)] [expr ($y1 + $y2) / 2.0 ] -text "-" -font $font -fill $textcolor -anchor "center" -state "hidden"
-	add_de1_text $contexts [expr ($x2 - 40) ] [expr ($y1 + $y2) / 2.0 ] -text "+" -font $font -fill $textcolor -anchor "center" -state "hidden"
-	add_de1_variable "$contexts" [expr ($x1 + $x2) / 2.0 ] [expr ($y1 + $y2) / 2.0 ] -width [expr ($x2 - $x1) - 80]  -text "" -font $font -fill $textcolor -anchor "center" -justify "center" -state "hidden" -textvariable $variable
-	set one_third_width {($x2 - $x1) / 3.0}
-	add_de1_button $contexts $action_down $x1 $y1 [expr $x1 + $one_third_width] $y2
-	add_de1_button $contexts $action_middle [expr $x1 + $one_third_width] $y1 [expr $x2 - $one_third_width] $y2
-	add_de1_button $contexts $action_up [expr $x2 - $one_third_width] $y1 $x2 $y2
-}
-
 create_triple_button "off" 580 30 980 150 $::font_tiny [theme button_secondary] [theme button_text_light] {wrap_temperature_adjust down} {restore_profile} {wrap_temperature_adjust up} {Temp:\n [iconik_expresso_temperature]}
 
 ## Espresso Target Weight
