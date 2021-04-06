@@ -154,7 +154,7 @@ array set ::iconik_settings {
     ui "default"
 }
 
-proc theme {cntx} {
+proc iconik_theme {cntx} {
     set theme_name $::iconik_settings(theme)
     return [set ${theme_name}($cntx)]
 }

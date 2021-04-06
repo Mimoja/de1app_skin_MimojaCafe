@@ -113,63 +113,63 @@ add_background "off"
 # Water level indicator
 if {$::iconik_settings(show_water_level_indicator) == 1} {
 	# water level sensor
-	add_de1_widget "off" scale 0 0 {after 1000 water_level_color_check $widget} -from 40 -to 5 -background [theme primary] -foreground [theme secondary] -borderwidth 1 -bigincrement .1 -resolution .1 -length [rescale_x_skin 1600] -showvalue 0 -width [rescale_y_skin 16] -variable ::de1(water_level) -state disabled -sliderrelief flat -font Helv_10_bold -sliderlength [rescale_x_skin 50] -relief flat -troughcolor [theme background] -borderwidth 0  -highlightthickness 0
+	add_de1_widget "off" scale 0 0 {after 1000 water_level_color_check $widget} -from 40 -to 5 -background [iconik_theme primary] -foreground [iconik_theme secondary] -borderwidth 1 -bigincrement .1 -resolution .1 -length [rescale_x_skin 1600] -showvalue 0 -width [rescale_y_skin 16] -variable ::de1(water_level) -state disabled -sliderrelief flat -font Helv_10_bold -sliderlength [rescale_x_skin 50] -relief flat -troughcolor [iconik_theme background] -borderwidth 0  -highlightthickness 0
 }
 
 
 # Profile QuickSettings
-create_button "settings_1" 80 1460 200 1580  $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 1} "1"
-create_button "settings_1" 220 1460 340 1580  $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 2} "2"
-create_button "settings_1" 360 1460 480 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 3}  "3"
+create_button "settings_1" 80 1460 200 1580  $::font_tiny [iconik_theme button] [iconik_theme button_text_light] {iconik_save_profile 1} "1"
+create_button "settings_1" 220 1460 340 1580  $::font_tiny [iconik_theme button] [iconik_theme button_text_light] {iconik_save_profile 2} "2"
+create_button "settings_1" 360 1460 480 1580 $::font_tiny [iconik_theme button] [iconik_theme button_text_light] {iconik_save_profile 3}  "3"
 
 if {$::iconik_settings(steam_presets_enabled) == 0} {
-	create_button "settings_1" 500 1460 620 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 4} "4" 
-	create_button "settings_1" 640 1460 760 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_profile 5} "5" 
+	create_button "settings_1" 500 1460 620 1580 $::font_tiny [iconik_theme button] [iconik_theme button_text_light] {iconik_save_profile 4} "4" 
+	create_button "settings_1" 640 1460 760 1580 $::font_tiny [iconik_theme button] [iconik_theme button_text_light] {iconik_save_profile 5} "5" 
 }
 
 if {$::iconik_settings(cleanup_use_profile) == 1} {
-	create_button "settings_1" 780 1460 940 1580 $::font_tiny [theme button] [theme button_text_light] {iconik_save_cleaning_profile} "Clean"
+	create_button "settings_1" 780 1460 940 1580 $::font_tiny [iconik_theme button] [iconik_theme button_text_light] {iconik_save_cleaning_profile} "Clean"
 }
 
 # Skin settings buttons
-create_button "settings_1 settings_2 settings_2a settings_2b settings_2c settings_2c2 settings_3 settings_4" 1080 1460 1480 1580 $::font_tiny [theme button] [theme button_text_light] { page_to_show_when_off "iconik_settings"} "Skin Settings" 
+create_button "settings_1 settings_2 settings_2a settings_2b settings_2c settings_2c2 settings_3 settings_4" 1080 1460 1480 1580 $::font_tiny [iconik_theme button] [iconik_theme button_text_light] { page_to_show_when_off "iconik_settings"} "Skin Settings" 
 
 # Upper buttons
 ## Background
-rectangle "off" 0 0 2560 180 [theme background_highlight]
+rectangle "off" 0 0 2560 180 [iconik_theme background_highlight]
 
 ## Flush
-create_settings_button "off" 80 30 480 150 $::font_tiny [theme button_secondary] [theme button_text_light]  {set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) - 0.5}]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) + 0.5}]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
+create_settings_button "off" 80 30 480 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light]  {set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) - 0.5}]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) + 0.5}]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
 
 ## Espresso Temperature
 if {$::iconik_settings(create_profile_backups) == 0} {
-	create_settings_button "off" 580 30 980 150 $::font_tiny [theme button_secondary] [theme button_text_light] {iconik_temperature_adjust down} {iconik_temperature_adjust up} {Temp:\n [iconik_expresso_temperature]}
+	create_settings_button "off" 580 30 980 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light] {iconik_temperature_adjust down} {iconik_temperature_adjust up} {Temp:\n [iconik_expresso_temperature]}
 } else {
-	create_triple_button "off" 580 30 980 150 $::font_tiny [theme button_secondary] [theme button_text_light] {iconik_temperature_adjust down} {restore_profile} {iconik_temperature_adjust up} {Temp:\n [iconik_expresso_temperature]}
+	create_triple_button "off" 580 30 980 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light] {iconik_temperature_adjust down} {restore_profile} {iconik_temperature_adjust up} {Temp:\n [iconik_expresso_temperature]}
 }
 
 ## Espresso Target Weight
-create_settings_button "off" 1080 30 1480 150 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) - 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) - 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) + 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) + 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Bev. weight:\n [iconik_get_final_weight_text]g}
+create_settings_button "off" 1080 30 1480 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light] {set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) - 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) - 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) + 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) + 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Bev. weight:\n [iconik_get_final_weight_text]g}
 
 if {$::iconik_settings(show_grinder_settings_on_main_page) == 0} {
 	## Steam
-	create_settings_button "off" 1580 30 1980 150 $::font_tiny [theme button_secondary] [theme button_text_light] {iconic_steam_tap down} {iconic_steam_tap up} {Steam $::iconik_settings(steam_active_slot):\n[iconik_get_steam_time]}
+	create_settings_button "off" 1580 30 1980 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light] {iconic_steam_tap down} {iconic_steam_tap up} {Steam $::iconik_settings(steam_active_slot):\n[iconik_get_steam_time]}
 	## Water Volume
-	create_settings_button "off" 2080 30 2480 150 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::settings(water_volume) [expr {$::settings(water_volume) - 5}]; de1_send_steam_hotwater_settings; save_settings} {  set ::settings(water_volume) [expr {$::settings(water_volume) + 5}]; de1_send_steam_hotwater_settings; save_settings} {Water [iconik_water_temperature]:\n[round_to_integer $::settings(water_volume)]ml}
+	create_settings_button "off" 2080 30 2480 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light] {set ::settings(water_volume) [expr {$::settings(water_volume) - 5}]; de1_send_steam_hotwater_settings; save_settings} {  set ::settings(water_volume) [expr {$::settings(water_volume) + 5}]; de1_send_steam_hotwater_settings; save_settings} {Water [iconik_water_temperature]:\n[round_to_integer $::settings(water_volume)]ml}
 } else {
 	# Grind Settings
-	create_settings_button "off" 1580 30 1980 150 $::font_tiny [theme button_secondary] [theme button_text_light] { set ::settings(grinder_dose_weight) [expr {$::settings(grinder_dose_weight) - 0.5}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [expr {$::settings(grinder_dose_weight) + 0.5}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n $::settings(grinder_dose_weight) ([iconik_get_ratio_text])}
+	create_settings_button "off" 1580 30 1980 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light] { set ::settings(grinder_dose_weight) [expr {$::settings(grinder_dose_weight) - 0.5}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [expr {$::settings(grinder_dose_weight) + 0.5}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n $::settings(grinder_dose_weight) ([iconik_get_ratio_text])}
 	if {$::iconik_settings(show_clock_on_main_page) == 1} {
 		## Show clock
-		create_button "off" 2080 30 2480 150 $::font_tiny [theme button_secondary] [theme button_text_light] {} { [time_format [clock seconds] 1]}
+		create_button "off" 2080 30 2480 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light] {} { [time_format [clock seconds] 1]}
 	} else {
-		create_settings_button "off" 2080 30 2480 150 $::font_tiny [theme button_secondary] [theme button_text_light]  { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) - 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) + 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Grinder Setting:\n $::settings(grinder_setting)}
+		create_settings_button "off" 2080 30 2480 150 $::font_tiny [iconik_theme button_secondary] [iconik_theme button_text_light]  { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) - 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) + 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Grinder Setting:\n $::settings(grinder_setting)}
 	}
 }
 
 # Recipe
-rounded_rectangle "off" 80 210 480 1110 [rescale_x_skin 80] [theme button]
-add_de1_variable "off" [expr (80 + 480) / 2.0 ] [expr (240 + 240) / 2.0 ] -width [rescale_x_skin 380]  -text "" -font $::font_big -fill [theme button_text_light] -anchor "n" -justify "center" -state "hidden" -textvariable {[string range $::settings(profile_title) 0 28]}
+rounded_rectangle "off" 80 210 480 1110 [rescale_x_skin 80] [iconik_theme button]
+add_de1_variable "off" [expr (80 + 480) / 2.0 ] [expr (240 + 240) / 2.0 ] -width [rescale_x_skin 380]  -text "" -font $::font_big -fill [iconik_theme button_text_light] -anchor "n" -justify "center" -state "hidden" -textvariable {[string range $::settings(profile_title) 0 28]}
 add_de1_button "off" { say [translate "settings"] $::settings(sound_button_in); iconik_show_settings} 80 240 480 360
 
 ### TIME
@@ -186,77 +186,77 @@ proc remember_last_profile { old new } {
 
 register_state_change_handler "Idle" "Espresso" ::remember_last_profile
 
-add_de1_text "off" $column1_pos [expr {$pos_top + (0 * $spacer)}] -justify left -anchor "nw" -text [translate "Time"] -font $::font_tiny -fill  [theme button_text_light] -width [rescale_x_skin 520]
-add_de1_variable "off" $column1_pos [expr {$pos_top + (1 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[preinfusion_pour_timer_text]}
-add_de1_variable "off" $column1_pos [expr {$pos_top + (2 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[pouring_timer_text]}
-add_de1_variable "off" $column1_pos [expr {$pos_top + (3 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[total_pour_timer_text]}
-add_de1_variable "off" $column1_pos [expr {$pos_top + (4 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[espresso_done_timer_text]}
-add_de1_variable "off" $column1_pos [expr {$pos_top + (5 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [theme button_text_dark] -width [rescale_x_skin 380] -textvariable {Last: $::last_profile}
+add_de1_text "off" $column1_pos [expr {$pos_top + (0 * $spacer)}] -justify left -anchor "nw" -text [translate "Time"] -font $::font_tiny -fill  [iconik_theme button_text_light] -width [rescale_x_skin 520]
+add_de1_variable "off" $column1_pos [expr {$pos_top + (1 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [iconik_theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[preinfusion_pour_timer_text]}
+add_de1_variable "off" $column1_pos [expr {$pos_top + (2 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [iconik_theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[pouring_timer_text]}
+add_de1_variable "off" $column1_pos [expr {$pos_top + (3 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [iconik_theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[total_pour_timer_text]}
+add_de1_variable "off" $column1_pos [expr {$pos_top + (4 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [iconik_theme button_text_dark] -width [rescale_x_skin 520] -textvariable {[espresso_done_timer_text]}
+add_de1_variable "off" $column1_pos [expr {$pos_top + (5 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill [iconik_theme button_text_dark] -width [rescale_x_skin 380] -textvariable {Last: $::last_profile}
 
 # Volume
-add_de1_text "off" $column1_pos [expr {$pos_top + (7 * $spacer)}] -justify left -anchor "nw" -text [translate "Volume"] -font $::font_tiny -fill  [theme button_text_light] -width [rescale_x_skin 520]
-add_de1_variable "off" $column1_pos [expr {$pos_top + (8 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[preinfusion_volume]}
-add_de1_variable "off" $column1_pos [expr {$pos_top + (9 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[pour_volume]}
-add_de1_variable "off" $column1_pos [expr {$pos_top + (10 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[watervolume_text]}
+add_de1_text "off" $column1_pos [expr {$pos_top + (7 * $spacer)}] -justify left -anchor "nw" -text [translate "Volume"] -font $::font_tiny -fill  [iconik_theme button_text_light] -width [rescale_x_skin 520]
+add_de1_variable "off" $column1_pos [expr {$pos_top + (8 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[preinfusion_volume]}
+add_de1_variable "off" $column1_pos [expr {$pos_top + (9 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[pour_volume]}
+add_de1_variable "off" $column1_pos [expr {$pos_top + (10 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[watervolume_text]}
 
 if {$::iconik_settings(always_show_temperatures) == 1} {
 	# Temperature
-	add_de1_text "off" $column1_pos [expr {$pos_top + (12 * $spacer)}] -justify left -anchor "nw" -text [translate "Temperature"] -font $::font_tiny -fill  [theme button_text_light] -width [rescale_x_skin 520]
-	add_de1_variable "off" $column1_pos [expr {$pos_top + (13 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate Group] [group_head_heater_temperature_text]}
-	add_de1_variable "off" $column1_pos [expr {$pos_top + (14 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate Steam] [steamtemp_text]}
-	add_de1_variable "off" $column1_pos [expr {$pos_top + (15 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate {Tank preheat}] [return_temperature_setting_or_off $::settings(tank_desired_water_temperature)]}
+	add_de1_text "off" $column1_pos [expr {$pos_top + (12 * $spacer)}] -justify left -anchor "nw" -text [translate "Temperature"] -font $::font_tiny -fill  [iconik_theme button_text_light] -width [rescale_x_skin 520]
+	add_de1_variable "off" $column1_pos [expr {$pos_top + (13 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate Group] [group_head_heater_temperature_text]}
+	add_de1_variable "off" $column1_pos [expr {$pos_top + (14 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate Steam] [steamtemp_text]}
+	add_de1_variable "off" $column1_pos [expr {$pos_top + (15 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate {Tank preheat}] [return_temperature_setting_or_off $::settings(tank_desired_water_temperature)]}
 } else {
 	# Max pressure, min flow
-	add_de1_text "off" $column1_pos [expr {$pos_top + (12 * $spacer)}] -justify left -anchor "nw" -text [translate "Pressure"] -font $::font_tiny -fill  [theme button_text_light] -width [rescale_x_skin 520]
-	add_de1_variable "off" $column1_pos [expr {$pos_top + (13 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[round_to_one_digits $::de1(pressure)] bar ([iconik_get_max_pressure] peak)}
-	add_de1_text "off" $column1_pos [expr {$pos_top + (14 * $spacer)}] -justify left -anchor "nw" -text [translate Flow] -font $::font_tiny -fill  [theme button_text_light] -width [rescale_x_skin 520]
-	add_de1_variable "off" $column1_pos [expr {$pos_top + (15 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[round_to_one_digits $::de1(flow)] ml/s ([iconik_get_min_flow] min)}
+	add_de1_text "off" $column1_pos [expr {$pos_top + (12 * $spacer)}] -justify left -anchor "nw" -text [translate "Pressure"] -font $::font_tiny -fill  [iconik_theme button_text_light] -width [rescale_x_skin 520]
+	add_de1_variable "off" $column1_pos [expr {$pos_top + (13 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[round_to_one_digits $::de1(pressure)] bar ([iconik_get_max_pressure] peak)}
+	add_de1_text "off" $column1_pos [expr {$pos_top + (14 * $spacer)}] -justify left -anchor "nw" -text [translate Flow] -font $::font_tiny -fill  [iconik_theme button_text_light] -width [rescale_x_skin 520]
+	add_de1_variable "off" $column1_pos [expr {$pos_top + (15 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[round_to_one_digits $::de1(flow)] ml/s ([iconik_get_min_flow] min)}
 }
 
 # water refill
 if {$::iconik_settings(show_ml_instead_of_water_level) == 1} {
-	add_de1_text "off" $column1_pos [expr {$pos_top + (17 * $spacer)}] -justify left -anchor "nw" -text [translate "Water remaining"] -font $::font_tiny -fill  [theme button_text_light] -width [rescale_x_skin 520]
-	add_de1_variable "off" $column1_pos [expr {$pos_top + (18 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[water_tank_level_to_milliliters $::de1(water_level)] [translate mL] ([round_to_integer $::de1(water_level)][translate mm])}
+	add_de1_text "off" $column1_pos [expr {$pos_top + (17 * $spacer)}] -justify left -anchor "nw" -text [translate "Water remaining"] -font $::font_tiny -fill  [iconik_theme button_text_light] -width [rescale_x_skin 520]
+	add_de1_variable "off" $column1_pos [expr {$pos_top + (18 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[water_tank_level_to_milliliters $::de1(water_level)] [translate mL] ([round_to_integer $::de1(water_level)][translate mm])}
 } else {
-	add_de1_text "off" $column1_pos [expr {$pos_top + (17 * $spacer)}] -justify left -anchor "nw" -text [translate "Waterlevel"] -font $::font_tiny -fill  [theme button_text_light] -width [rescale_x_skin 520]
-	add_de1_variable "off" $column1_pos [expr {$pos_top + (18 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {Lim: $::settings(water_refill_point) Curr: [round_to_one_digits $::de1(water_level)]}
+	add_de1_text "off" $column1_pos [expr {$pos_top + (17 * $spacer)}] -justify left -anchor "nw" -text [translate "Waterlevel"] -font $::font_tiny -fill  [iconik_theme button_text_light] -width [rescale_x_skin 520]
+	add_de1_variable "off" $column1_pos [expr {$pos_top + (18 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [iconik_theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {Lim: $::settings(water_refill_point) Curr: [round_to_one_digits $::de1(water_level)]}
 }
 
 # Presets
 
 ## Coffee
-create_button "off" 80 1140 480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 1} {[iconik_profile_title 1]}
+create_button "off" 80 1140 480 1380 $::font_tiny [iconik_theme button_coffee] [iconik_theme button_text_light] {iconik_toggle_profile 1} {[iconik_profile_title 1]}
 create_active_marker "off" 80 1140 480 1380 {[iconik_is_coffee_chosen 1]}
-create_button "off" 580 1140 980 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 2} {[iconik_profile_title 2]}
+create_button "off" 580 1140 980 1380 $::font_tiny [iconik_theme button_coffee] [iconik_theme button_text_light] {iconik_toggle_profile 2} {[iconik_profile_title 2]}
 create_active_marker "off" 580 1140 980 1380 {[iconik_is_coffee_chosen 2]}
-create_button "off" 1080 1140 1480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 3} {[iconik_profile_title 3]}
+create_button "off" 1080 1140 1480 1380 $::font_tiny [iconik_theme button_coffee] [iconik_theme button_text_light] {iconik_toggle_profile 3} {[iconik_profile_title 3]}
 create_active_marker "off" 1080 1140 1480 1380 {[iconik_is_coffee_chosen 3]}
 
 
 if {$::iconik_settings(steam_presets_enabled) == 1} {
 	## Steam Presets
-	create_button "off" 1580 1140 1980 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_steam_settings 1} {Steam 1:\n[iconik_steam_timeout 1]s}
+	create_button "off" 1580 1140 1980 1380 $::font_tiny [iconik_theme button_coffee] [iconik_theme button_text_light] {iconik_toggle_steam_settings 1} {Steam 1:\n[iconik_steam_timeout 1]s}
 	create_active_marker "off" 1580 1140 1980 1380 {[iconik_is_steam_chosen 1]}
-	create_button "off" 2080 1140 2480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_steam_settings 2} {Steam 2:\n[iconik_steam_timeout 2]s} 
+	create_button "off" 2080 1140 2480 1380 $::font_tiny [iconik_theme button_coffee] [iconik_theme button_text_light] {iconik_toggle_steam_settings 2} {Steam 2:\n[iconik_steam_timeout 2]s} 
 	create_active_marker "off" 2080 1140 2480 1380 {[iconik_is_steam_chosen 2]}
 } else {
 	# Two more coffee presets
-	create_button "off"  1580 1140 1980 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 4} {[iconik_profile_title 4]}
+	create_button "off"  1580 1140 1980 1380 $::font_tiny [iconik_theme button_coffee] [iconik_theme button_text_light] {iconik_toggle_profile 4} {[iconik_profile_title 4]}
 	create_active_marker "off" 1580 1140 1980 1380 {[iconik_is_coffee_chosen 4]}
-	create_button "off" 2080 1140 2480 1380 $::font_tiny [theme button_coffee] [theme button_text_light] {iconik_toggle_profile 5} {[iconik_profile_title 5]}
+	create_button "off" 2080 1140 2480 1380 $::font_tiny [iconik_theme button_coffee] [iconik_theme button_text_light] {iconik_toggle_profile 5} {[iconik_profile_title 5]}
 	create_active_marker "off" 2080 1140 2480 1380 {[iconik_is_coffee_chosen 5]}
 }
 
 ## Bottom buttons
 
-rectangle "off" 0 1410 2560 1600 [theme background_highlight]
+rectangle "off" 0 1410 2560 1600 [iconik_theme background_highlight]
 
 ## Status and MISC buttons
-create_button "off" 80 1440 480 1560    $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_status_tap } {[iconik_get_status_text]}
-create_button "off" 580 1440 980 1560   $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_history_page} {[translate "History"]}
-create_button "off" 1080 1440 1480 1560 $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_toggle_cleaning } { [translate "Clean"]} 
-create_button "off" 1580 1440 1980 1560 $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_select_profile } {[translate "Settings"]}
-create_button "off" 2080 1440 2480 1560 $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); start_sleep } { [translate "Sleep"]}
+create_button "off" 80 1440 480 1560    $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_status_tap } {[iconik_get_status_text]}
+create_button "off" 580 1440 980 1560   $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_history_page} {[translate "History"]}
+create_button "off" 1080 1440 1480 1560 $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_toggle_cleaning } { [translate "Clean"]} 
+create_button "off" 1580 1440 1980 1560 $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_select_profile } {[translate "Settings"]}
+create_button "off" 2080 1440 2480 1560 $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); start_sleep } { [translate "Sleep"]}
 
 
 proc ghc_text_or_stop {text} {
@@ -277,10 +277,10 @@ proc ghc_action_or_stop {action} {
 
 ## GHC buttons
 if {$::iconik_settings(show_ghc_buttons) == 1} {
-	create_button "off" 2180 210 2480 390  $::font_tiny [theme button_tertiary] [theme button_text_light] { ghc_action_or_stop start_espresso } {[ghc_text_or_stop "Espresso"]}
-	create_button "off" 2180 450 2480 630  $::font_tiny [theme button_tertiary] [theme button_text_light] { ghc_action_or_stop start_water}     {[ghc_text_or_stop "Water"]}
-	create_button "off" 2180 690 2480 870  $::font_tiny [theme button_tertiary] [theme button_text_light] { ghc_action_or_stop start_steam}     {[ghc_text_or_stop "Steam"]}
-	create_button "off" 2180 930 2480 1110 $::font_tiny [theme button_tertiary] [theme button_text_light] { ghc_action_or_stop start_flush}     {[ghc_text_or_stop "Flush"]} 
+	create_button "off" 2180 210 2480 390  $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { ghc_action_or_stop start_espresso } {[ghc_text_or_stop "Espresso"]}
+	create_button "off" 2180 450 2480 630  $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { ghc_action_or_stop start_water}     {[ghc_text_or_stop "Water"]}
+	create_button "off" 2180 690 2480 870  $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { ghc_action_or_stop start_steam}     {[ghc_text_or_stop "Steam"]}
+	create_button "off" 2180 930 2480 1110 $::font_tiny [iconik_theme button_tertiary] [iconik_theme button_text_light] { ghc_action_or_stop start_flush}     {[ghc_text_or_stop "Flush"]} 
 }
 
 
@@ -302,28 +302,28 @@ add_de1_widget "off" graph 580 230 {
 	set ::skin::mimojacafe::graph::espresso $widget
 
 	# configure axes
-	$widget axis configure x -color [theme background_text] -tickfont Helv_6;
-	$widget axis configure y -color [theme background_text] -tickfont Helv_6 -min 0.0 -max $::settings(zoomed_y_axis_scale) -subdivisions 5 -majorticks {0 1 2 3 4 5 6 7 8 9 10 11 12} -hide 0;
-	$widget axis configure y2 -color [theme background_text] -tickfont Helv_6 -min 0.0 -max [expr {$::settings(zoomed_y_axis_scale) / 3 * 2}] -subdivisions 0 -majorticks {0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8} -title [translate {Flow [ml/s]}] -titlecolor [theme background_text] -hide 0;
+	$widget axis configure x -color [iconik_theme background_text] -tickfont Helv_6;
+	$widget axis configure y -color [iconik_theme background_text] -tickfont Helv_6 -min 0.0 -max $::settings(zoomed_y_axis_scale) -subdivisions 5 -majorticks {0 1 2 3 4 5 6 7 8 9 10 11 12} -hide 0;
+	$widget axis configure y2 -color [iconik_theme background_text] -tickfont Helv_6 -min 0.0 -max [expr {$::settings(zoomed_y_axis_scale) / 3 * 2}] -subdivisions 0 -majorticks {0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8} -title [translate {Flow [ml/s]}] -titlecolor [iconik_theme background_text] -hide 0;
 	
 	# create lines
-	$widget element create line_espresso_pressure_goal -xdata espresso_elapsed -ydata espresso_pressure_goal -symbol none -label "" -linewidth [rescale_x_skin 8] -color [theme primary_light]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes {5 5};
-	$widget element create line2_espresso_pressure -xdata espresso_elapsed -ydata espresso_pressure -symbol none -label "" -linewidth [rescale_x_skin 12] -color [theme primary]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_pressure);
+	$widget element create line_espresso_pressure_goal -xdata espresso_elapsed -ydata espresso_pressure_goal -symbol none -label "" -linewidth [rescale_x_skin 8] -color [iconik_theme primary_light]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes {5 5};
+	$widget element create line2_espresso_pressure -xdata espresso_elapsed -ydata espresso_pressure -symbol none -label "" -linewidth [rescale_x_skin 12] -color [iconik_theme primary]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_pressure);
 
 	if {$::settings(display_pressure_delta_line) == 1} {
-		$widget element create line_espresso_pressure_delta_1  -xdata espresso_elapsed -ydata espresso_pressure_delta -symbol none -label "" -linewidth [rescale_x_skin 2] -color [theme primary_dark] -pixels 0 -smooth $::settings(live_graph_smoothing_technique)
+		$widget element create line_espresso_pressure_delta_1  -xdata espresso_elapsed -ydata espresso_pressure_delta -symbol none -label "" -linewidth [rescale_x_skin 2] -color [iconik_theme primary_dark] -pixels 0 -smooth $::settings(live_graph_smoothing_technique)
 	}
 
 	if {$::iconik_settings(always_show_temperatures)} {
 		$widget axis create temp
-		$widget axis configure temp -color [theme background_text] -min 0.0 -max [expr {$::settings(zoomed_y_axis_scale) * 10}]
+		$widget axis configure temp -color [iconik_theme background_text] -min 0.0 -max [expr {$::settings(zoomed_y_axis_scale) * 10}]
 		
 		$widget element create line_espresso_temperature_goal -xdata espresso_elapsed -ydata espresso_temperature_goal -mapy temp  -symbol none -label ""  -linewidth [rescale_x_skin 8] -color #ffa5a6 -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes {5 5}; 
 		$widget element create line_espresso_temperature_basket -xdata espresso_elapsed -ydata espresso_temperature_basket -mapy temp -symbol none -label ""  -linewidth [rescale_x_skin 12] -color #e73249 -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_temperature);  
 	}
 
-	$widget element create line_espresso_flow_goal  -xdata espresso_elapsed -ydata espresso_flow_goal -mapy y2 -symbol none -label "" -linewidth [rescale_x_skin 8] -color [theme secondary_light] -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes {5 5};
-	$widget element create line_espresso_flow  -xdata espresso_elapsed -ydata espresso_flow -mapy y2 -symbol none -label "" -linewidth [rescale_x_skin 12] -color  [theme secondary] -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes $::settings(chart_dashes_flow);
+	$widget element create line_espresso_flow_goal  -xdata espresso_elapsed -ydata espresso_flow_goal -mapy y2 -symbol none -label "" -linewidth [rescale_x_skin 8] -color [iconik_theme secondary_light] -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes {5 5};
+	$widget element create line_espresso_flow  -xdata espresso_elapsed -ydata espresso_flow -mapy y2 -symbol none -label "" -linewidth [rescale_x_skin 12] -color  [iconik_theme secondary] -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes $::settings(chart_dashes_flow);
 	$widget element create god_line_espresso_flow  -xdata espresso_elapsed -ydata god_espresso_flow -mapy y2 -symbol none -label "" -linewidth [rescale_x_skin 24] -color #e4edff -smooth $::settings(live_graph_smoothing_technique) -pixels 0;
 
 	if {$::settings(chart_total_shot_flow) == 1} {
@@ -355,15 +355,15 @@ add_de1_widget "off" graph 580 230 {
 	
 	
 	# show the explanation for pressure
-	$widget element create line_espresso_de1_explanation_chart_pressurec -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_pressure  -label "" -linewidth [rescale_x_skin 16] -color [theme primary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
+	$widget element create line_espresso_de1_explanation_chart_pressurec -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_pressure  -label "" -linewidth [rescale_x_skin 16] -color [iconik_theme primary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
 	
 	# show the explanation for flow
-	$widget element create line_espresso_de1_explanation_chart_flowc -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_flow -mapy y2  -label "" -linewidth [rescale_x_skin 18] -color [theme secondary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
+	$widget element create line_espresso_de1_explanation_chart_flowc -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_flow -mapy y2  -label "" -linewidth [rescale_x_skin 18] -color [iconik_theme secondary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
 	
 	# show the explanation for temperature
 	$widget element create line_espresso_de1_explanation_chart_temp -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_temperature -mapy temp -label "" -linewidth [rescale_x_skin 15] -color #ff888c  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0; 
 
-} -plotbackground [theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin $espresso_graph_height] -borderwidth 1 -background [theme background] -plotrelief flat -plotpady 0 -plotpadx 10
+} -plotbackground [iconik_theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin $espresso_graph_height] -borderwidth 1 -background [iconik_theme background] -plotrelief flat -plotpady 0 -plotpadx 10
 
 
 if {$::iconik_settings(show_steam) == 1} {
@@ -375,8 +375,8 @@ if {$::iconik_settings(show_steam) == 1} {
 		$widget element create line_steam_flow -xdata steam_elapsed -ydata steam_flow -symbol none -label "" -linewidth [rescale_x_skin 6] -color #43B1E3  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_flow);
 		$widget element create line_steam_temperature -xdata steam_elapsed -ydata steam_temperature -symbol none -label "" -linewidth [rescale_x_skin 6] -color #FF2600 -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_temperature);
 
-		$widget axis configure x -color [theme background_text] -tickfont Helv_6 -linewidth [rescale_x_skin 2]
-		$widget axis configure y -color [theme background_text] -tickfont Helv_6 -min 0 -max 4 -subdivisions 5 -majorticks {1 2 3 4}
+		$widget axis configure x -color [iconik_theme background_text] -tickfont Helv_6 -linewidth [rescale_x_skin 2]
+		$widget axis configure y -color [iconik_theme background_text] -tickfont Helv_6 -min 0 -max 4 -subdivisions 5 -majorticks {1 2 3 4}
 
-	} -plotbackground [theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin 300] -borderwidth 1 -background [theme background] -plotrelief flat
+	} -plotbackground [iconik_theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin 300] -borderwidth 1 -background [iconik_theme background] -plotrelief flat
 }

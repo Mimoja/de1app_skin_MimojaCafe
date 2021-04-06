@@ -2,7 +2,7 @@
 # Functions for creating the Metric menu framework
 
 proc add_background { contexts } {
-	set background_id [.can create rect 0 0 [rescale_x_skin 2560] [rescale_y_skin 1600] -fill [theme background] -width 0 -state "hidden"]
+	set background_id [.can create rect 0 0 [rescale_x_skin 2560] [rescale_y_skin 1600] -fill [iconik_theme background] -width 0 -state "hidden"]
 	add_visual_items_to_contexts $contexts $background_id
 }
 
@@ -102,5 +102,5 @@ proc create_grid { } {
 }
 
 proc create_active_marker { context x1 y1 x2 y2 textvariable } {
-	add_de1_variable $context [expr ($x1 + $x2) / 2.0 ] [expr (($y1 + $y2) / 2.0) + 80 ] -width [rescale_x_skin [expr ($x2 - $x1) - 20]]  -text "" -font $::font_tiny -fill [theme button_text_light] -anchor "center" -justify "center" -state "hidden" -textvariable $textvariable
+	add_de1_variable $context [expr ($x1 + $x2) / 2.0 ] [expr (($y1 + $y2) / 2.0) + 80 ] -width [rescale_x_skin [expr ($x2 - $x1) - 20]]  -text "" -font $::font_tiny -fill [iconik_theme button_text_light] -anchor "center" -justify "center" -state "hidden" -textvariable $textvariable
 }
