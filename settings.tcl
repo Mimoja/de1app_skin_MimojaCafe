@@ -111,12 +111,17 @@ array set ::cocoa_theme {
 }
 
 # fonts
+set ::font_tiniest [get_font "Mazzard Regular" 13]
+set ::font_tinier [get_font "Mazzard Regular" 15]
 set ::font_tiny [get_font "Mazzard Regular" 16]
 set ::font_small [get_font "Mazzard Regular" 18]
 set ::font_big [get_font "Mazzard Regular" 22]
 set ::font_tiny_icon [get_font "Font Awesome 5 Free-Solid-900" 16]
 set ::font_small_icon [get_font "Font Awesome 5 Free-Solid-900" 18]
 set ::font_big_icon [get_font "Font Awesome 5 Free-Solid-900" 22]
+
+set ::font_tiny_header [get_font "Mazzard SemiBold" 16]
+set ::font_small_header [get_font "Mazzard SemiBold" 18]
 
 array set ::iconik_settings {
     profiles {1 {name default title Default} 2 {name {Gentle and sweet} title {Gentle and sweet}} 3 {name rao_allonge title {Rao Allongé}} 4 {name {Classic Italian espresso} title {Classic Italian espresso}} 5 {name {Blooming espresso} title {Blooming Espresso}}}
@@ -142,7 +147,9 @@ array set ::iconik_settings {
     large_mug_setting 0
     always_show_temperatures 0
     create_profile_backups 0
-    
+    show_grid_lines 1
+    show_steam_grid_lines 1
+
     saver_dir {/saver}
 
     show_water_level_indicator 0
@@ -154,7 +161,7 @@ array set ::iconik_settings {
     ui "default"
 }
 
-proc iconik_theme {cntx} {
+proc ::theme {cntx} {
     set theme_name $::iconik_settings(theme)
     return [set ${theme_name}($cntx)]
 }
