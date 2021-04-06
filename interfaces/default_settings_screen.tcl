@@ -19,15 +19,8 @@ add_de1_widget "iconik_settings" checkbutton 160 720 {} -text [translate "Try re
 add_de1_widget "iconik_settings" checkbutton 160 780 {} -text [translate "Double the scale input / Spouted portafilter scale mode"] -indicatoron true  -font $::font_tiny -bg [theme background] -anchor nw -foreground [theme background_text] -variable ::settings(scale_stop_at_half_shot)  -borderwidth 0 -selectcolor [theme background] -highlightthickness 0 -activebackground [theme background]  -bd 0 -activeforeground [theme background_text] -relief flat -bd 0
 add_de1_widget "iconik_settings" checkbutton 160 840 {} -text [translate "Replace Steam & Hotwater with Grinder settings"] -indicatoron true  -font $::font_tiny -bg [theme background] -anchor nw -foreground [theme background_text] -variable ::iconik_settings(show_grinder_settings_on_main_page)  -borderwidth 0 -selectcolor [theme background] -highlightthickness 0 -activebackground [theme background]  -bd 0 -activeforeground [theme background_text] -relief flat -bd 0
 add_de1_widget "iconik_settings" checkbutton 1120 840 {} -text [translate "or show Clock instead"] -indicatoron true  -font $::font_tiny -bg [theme background] -anchor nw -foreground [theme background_text] -variable ::iconik_settings(show_clock_on_main_page)  -borderwidth 0 -selectcolor [theme background] -highlightthickness 0 -activebackground [theme background]  -bd 0 -activeforeground [theme background_text] -relief flat -bd 0
-
-
-# Screensaver folder
-add_de1_text iconik_settings 180 900 -text [translate "Screensaver folder"] -font $::font_tiny -width 300 -fill [theme background_text] -anchor "nw"
-# The actual content. Here a list of all settings for this plugin
-add_de1_widget "iconik_settings" entry 180 960  {
-    bind $widget <Return> { say [translate {save}] $::settings(sound_button_in); borg toast [translate "Saved"]; iconik_save_settings; hide_android_keyboard}
-    bind $widget <Leave> hide_android_keyboard
-} -width [expr {int(38 * $::globals(entry_length_multiplier))}] -font $::font_tiny  -borderwidth 1 -bg [theme background_highlight]  -foreground [theme background_text] -textvariable ::iconik_settings(saver_dir) -relief flat  -highlightthickness 1 -highlightcolor [theme button_text_light]
+add_de1_widget "iconik_settings" checkbutton 160 900 {} -text [translate "Always show temperatures"] -indicatoron true  -font $::font_tiny -bg [theme background] -anchor nw -foreground [theme background_text] -variable ::iconik_settings(always_show_temperatures)  -borderwidth 0 -selectcolor [theme background] -highlightthickness 0 -activebackground [theme background]  -bd 0 -activeforeground [theme background_text] -relief flat -bd 0
+add_de1_widget "iconik_settings" checkbutton 160 960 {} -text [translate "EXPERIMENTAL: Create profile backups"] -indicatoron true  -font $::font_tiny -bg [theme background] -anchor nw -foreground [theme background_text] -variable ::iconik_settings(create_profile_backups)  -borderwidth 0 -selectcolor [theme background] -highlightthickness 0 -activebackground [theme background]  -bd 0 -activeforeground [theme background_text] -relief flat -bd 0
 
 
 ## Dose / Grind settings
@@ -50,8 +43,8 @@ create_button "iconik_settings" 2060 520 2260 700 $::font_tiny $::red_theme(butt
 add_de1_text  "iconik_settings" 1800 760 -text "UI:" -anchor center -justify center -font $::font_small -fill [theme background_text]
 create_button "iconik_settings" 1800 820 2000 1020 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::iconik_settings(ui) "default"; iconik_save_settings; borg toast "UI changed, please restart"} "Default" 
 create_button "iconik_settings" 2060 820 2260 1020 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::iconik_settings(ui) "magadan"; iconik_save_settings; borg toast "UI changed, please restart"} "Magadan"
-create_button "iconik_settings" 2320 820 2520 1020 $::font_tiny [theme button_secondary] [theme button_text_light] {set ::iconik_settings(ui) "silas"; iconik_save_settings; borg toast "UI changed, please restart"} "Silas"
 
+add_de1_variable "iconik_settings" 1800 1080 -justify center -anchor "nw" -text "" -font $::font_small  -fill  [theme background_text]  -width [rescale_x_skin 520] -textvariable {Screensaver folder: $::iconik_settings(saver_dir)}
 
 # System Settings button
 create_button "iconik_settings" 2080 1440 2480 1560 $::font_tiny [theme button_tertiary] [theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_save_settings; iconik_show_settings} {[translate "System Settings"] }

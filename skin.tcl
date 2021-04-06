@@ -13,7 +13,7 @@ source "[skin_directory]/settings.tcl"
 iconik_load_settings
 iconik_save_settings
 
-set ::version_string "Version 1.5.1-$::iconik_settings(ui)"
+set ::version_string "Version 1.6-$::iconik_settings(ui)"
 
 source "[skin_directory]/framework.tcl"
 
@@ -89,6 +89,9 @@ proc iconik_get_status_text {} {
 			return [translate "Ready"]
 		}
 		1 {
+			if {$::iconik_settings(always_show_temperatures)} {
+				return [translate "Heating"]
+			}
 			return [translate "Heating"]\n[group_head_heater_temperature_text]
 		}
 		3 {
@@ -136,6 +139,10 @@ proc iconic_steam_tap {up} {
 }
 
 proc iconik_temperature_adjust {up} {
+	if {$::iconik_settings(create_profile_backups) == 1} {
+		backup_profile
+	}
+
 	if {$::settings(settings_profile_type) == "settings_2c2" || $::settings(settings_profile_type) == "settings_2c"} {
 		set new_profile {}
 		foreach step $::settings(advanced_shot) {
@@ -162,6 +169,26 @@ proc iconik_temperature_adjust {up} {
 	save_settings_to_de1
 	save_settings
 }
+
+
+set ::active_button_indicator {___________________________}
+
+proc iconik_is_coffee_chosen { slot } {
+	if {[ifexists ::settings(original_profile_title)] == [iconik_profile_title $slot]} {
+		return $::active_button_indicator
+	} else {
+		return {}
+	}
+}
+
+proc iconik_is_steam_chosen { slot } {
+	if {$::settings(steam_timeout) == [iconik_steam_timeout $slot]} {
+		return $::active_button_indicator
+	} else {
+		return {}
+	}
+}
+
 
 proc iconik_toggle_steam_settings {slot} {
 

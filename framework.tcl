@@ -101,6 +101,6 @@ proc create_grid { } {
 	}
 }
 
-proc create_active_marker { x1 y1 x2 y2 textvariable } {
-	add_de1_variable "off"  [expr ($x1 + $x2) / 2.0 ] [expr (($y1 + $y2) / 2.0) + 80 ] -width [rescale_x_skin [expr ($x2 - $x1) - 20]]  -text "" -font $::font_tiny -fill [theme button_text_light] -anchor "center" -justify "center" -state "hidden" -textvariable $textvariable
+proc create_active_marker { context x1 y1 x2 y2 textvariable } {
+	add_de1_variable $context [expr ($x1 + $x2) / 2.0 ] [expr (($y1 + $y2) / 2.0) + 80 ] -width [rescale_x_skin [expr ($x2 - $x1) - 20]]  -text "" -font $::font_tiny -fill [theme button_text_light] -anchor "center" -justify "center" -state "hidden" -textvariable $textvariable
 }
