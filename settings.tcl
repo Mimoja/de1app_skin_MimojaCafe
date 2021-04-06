@@ -140,6 +140,8 @@ array set ::iconik_settings {
     show_clock_on_main_page 0
     small_mug_setting 0
     large_mug_setting 0
+    always_show_temperatures 0
+    create_profile_backups 0
     
     saver_dir {/saver}
 
