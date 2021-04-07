@@ -60,7 +60,6 @@ create_button "iconik_settings" 1630 670 1830 820 $::font_tiny $::red_theme(butt
 add_de1_text  "iconik_settings" 1370 140 -text "User Interface:" -anchor w -justify center -font $::font_small_header -fill [::theme background_text]
 create_button "iconik_settings" 1370 180 1570 330 $::font_tiny [::theme button] [::theme button_text_light] {set ::iconik_settings(ui) "default"; iconik_save_settings; borg toast "UI changed, please restart"} "Default" 
 create_button "iconik_settings" 1630 180 1830 330 $::font_tiny [::theme button] [::theme button_text_light] {set ::iconik_settings(ui) "magadan"; iconik_save_settings; borg toast "UI changed, please restart"} "Magadan"
-create_button "iconik_settings" 1890 180 2090 330 $::font_tiny [::theme button] [::theme button_text_light] {set ::iconik_settings(ui) "silas"; iconik_save_settings; borg toast "UI changed, please restart"} "Silas"
 
 # Bottom buttons
 create_button "iconik_settings" 210 1460 1220 1580 $::font_small [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_save_settings; page_to_show_when_off "off" } { [translate "Done"]}
