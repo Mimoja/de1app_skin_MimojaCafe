@@ -2,8 +2,8 @@ package require de1plus 1.0
 
 source "[homedir]/skins/default/standard_includes.tcl"
 
-set ::skindebug 0
-set ::debugging 0
+set ::skindebug 1
+set ::debugging 1
 set ::history_to_restore_after_cleanup {}
 
 namespace eval ::skin::mimojacafe::graph {}
@@ -17,12 +17,57 @@ set ::version_string "Version 1.6-$::iconik_settings(ui)"
 
 source "[skin_directory]/framework.tcl"
 
-source "[skin_directory]/interfaces/$::iconik_settings(ui)_ui.tcl"
+proc iconik_wakeup {} {
+	set_next_page "off" "$::iconik_settings(ui)_off"
+	page_show "$::iconik_settings(ui)_off"
+	start_idle
+}
 
+
+source "[skin_directory]/interfaces/default_ui.tcl"
+source "[skin_directory]/interfaces/magadan_ui.tcl"
+
+# History Page
+source "[skin_directory]/history_viewer.tcl"
+
+# Settings Page
+source "[skin_directory]/interfaces/default_settings_screen.tcl"
+
+# Return from screensaver
+set_de1_screen_saver_directory [homedir]$::iconik_settings(saver_dir)
+add_de1_button "saver" {say [translate "wake"] $::settings(sound_button_in); iconik_wakeup} 0 0 2560 1600
+
+
+# Profile QuickSettings
+create_button "settings_1" 80 1460 200 1580  $::font_tiny [::theme button] [::theme button_text_light] {iconik_save_profile 1} "1"
+create_button "settings_1" 220 1460 340 1580 $::font_tiny [::theme button] [::theme button_text_light] {iconik_save_profile 2} "2"
+create_button "settings_1" 360 1460 480 1580 $::font_tiny [::theme button] [::theme button_text_light] {iconik_save_profile 3} "3"
+create_button "settings_1" 500 1460 620 1580 $::font_tiny [::theme button] [::theme button_text_light] {iconik_save_profile 4} "4" 
+
+if {$::iconik_settings(steam_presets_enabled) == 0} {
+	create_button "settings_1" 640 1460 760 1580 $::font_tiny [::theme button] [::theme button_text_light] {iconik_save_profile 5} "5" 
+}
+
+if {$::iconik_settings(cleanup_use_profile) == 1} {
+	create_button "settings_1" 780 1460 940 1580 $::font_tiny [::theme button] [::theme button_text_light] {iconik_save_cleaning_profile} "Clean"
+}
+
+
+# Skin settings buttons
+create_button "settings_1 settings_2 settings_2a settings_2b settings_2c settings_2c2 settings_3 settings_4" 1080 1460 1480 1580 $::font_tiny [::theme button] [::theme button_text_light] { page_to_show_when_off "iconik_settings"} "Skin Settings" 
+
+iconik_wakeup
 
 create_grid
 .can itemconfigure "grid" -state "hidden"
 #.can itemconfigure "grid" -state "normal"
+
+proc iconik_home {} {
+	::page_to_show_when_off "$::iconik_settings(ui)_off"
+}
+
+# We no longer have an off page
+::add_de1_action "off" ::iconik_home
 
 if {[info exists ::settings(grinder_setting)] != 1 || $::settings(grinder_setting) == {}} {
 	set ::settings(grinder_setting) 0
@@ -32,11 +77,10 @@ if {[info exists ::settings(grinder_dose_weight)] != 1 || $::settings(grinder_do
 	set ::settings(grinder_dose_weight) 0
 }
 
-
 #dont change page on state change
 proc skins_page_change_due_to_de1_state_change { textstate } {
 	if {$textstate == "Idle"} {
-		page_display_change $::de1(current_context) "off"
+		page_display_change $::de1(current_context) "$::iconik_settings(ui)_off"
     } elseif {$textstate == "Sleep"} {
 		page_display_change $::de1(current_context) "saver"
     } elseif {$textstate == "Refill"} {

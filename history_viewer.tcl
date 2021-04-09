@@ -196,4 +196,4 @@ proc set_history_scrollbar_dimensions {} {
 }
 
 create_button "history" 580 1440 1160 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); god_shot_from_history; page_to_show_when_off "off" } {[translate "Make Reference / Godshot"] }
-create_button "history" 1210 1440 1880 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); page_to_show_when_off "off" } {[translate "Done"]}
+create_button "history" 1210 1440 1880 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); page_to_show_when_off "$::iconik_settings(ui)_off" } {[translate "Done"]}
