@@ -2,8 +2,8 @@ package require de1plus 1.0
 
 source "[homedir]/skins/default/standard_includes.tcl"
 
-set ::skindebug 1
-set ::debugging 1
+set ::skindebug 0
+set ::debugging 0
 set ::history_to_restore_after_cleanup {}
 
 namespace eval ::skin::mimojacafe::graph {}
