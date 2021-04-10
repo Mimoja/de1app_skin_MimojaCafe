@@ -157,6 +157,8 @@ array set ::iconik_settings {
     water_temperature_overwride 95
     seperate_flow_axis 0
 
+
+    y_axis_scale 12
     max_history_items 100
 
     ui "default"

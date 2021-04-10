@@ -265,12 +265,12 @@ add_de1_widget "default_off" graph 580 230 {
 
 	# configure axes
 	$widget axis configure x -color [::theme background_text] -tickfont Helv_6;
-	$widget axis configure y -color [::theme background_text] -tickfont Helv_6 -min 0.0 -max $::settings(zoomed_y_axis_scale) -subdivisions 5 -majorticks {0 1 2 3 4 5 6 7 8 9 10 11 12} -hide 0;
+	$widget axis configure y -color [::theme background_text] -tickfont Helv_6 -min 0.0 -max $::iconik_settings(y_axis_scale) -subdivisions 5 -majorticks {0 1 2 3 4 5 6 7 8 9 10 11 12} -hide 0;
 
 	set flow_axis y
 
 	if {$::iconik_settings(seperate_flow_axis)} {
-		$widget axis configure y2 -color [::theme secondary] -tickfont Helv_6 -min 0.0 -max [expr {$::settings(zoomed_y_axis_scale) / 3 * 2}] -subdivisions 0 -majorticks {0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8} -title [translate {Flow [ml/s]}] -titlecolor [::theme secondary] -hide 0;
+		$widget axis configure y2 -color [::theme secondary] -tickfont Helv_6 -min 0.0 -max [expr {$::iconik_settings(y_axis_scale) / 3 * 2}] -subdivisions 0 -majorticks {0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8} -title [translate {Flow [ml/s]}] -titlecolor [::theme secondary] -hide 0;
 		set flow_axis y2
 	}
 
@@ -287,7 +287,7 @@ add_de1_widget "default_off" graph 580 230 {
 
 	if {$::iconik_settings(always_show_temperatures)} {
 		$widget axis create temp
-		$widget axis configure temp -color [::theme background_text] -min 0.0 -max [expr {$::settings(zoomed_y_axis_scale) * 10}]
+		$widget axis configure temp -color [::theme background_text] -min 0.0 -max [expr {$::iconik_settings(y_axis_scale) * 10}]
 		
 		$widget element create line_espresso_temperature_goal -xdata espresso_elapsed -ydata espresso_temperature_goal -mapy temp  -symbol none -label ""  -linewidth [rescale_x_skin 8] -color #ffa5a6 -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes {5 5}; 
 		$widget element create line_espresso_temperature_basket -xdata espresso_elapsed -ydata espresso_temperature_basket -mapy temp -symbol none -label ""  -linewidth [rescale_x_skin 12] -color #e73249 -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_temperature);  
