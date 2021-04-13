@@ -212,22 +212,6 @@ create_button "magadan_off" [expr {$b_btn_hpos_r - 1 * ($b_btn_width_tiny + $b_b
 # Sleep
 create_button "magadan_off" [expr {$b_btn_hpos_r - 0 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 0 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); start_sleep } {\uf186}
 
-
-proc ghc_text_or_stop {text} {
-	if { $::de1(substate) >= 1} {
-		return [translate Stop]
-	}
-	return $text
-}
-
-proc ghc_action_or_stop {action} {
-	if { $::de1(substate) >= 1} {
-		start_idle
-		return
-	}
-	$action
-}
-
 ## GHC buttons
 if {$::iconik_settings(show_ghc_buttons) == 1} {
 	create_button "magadan_off" 2180 210 2480 390  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_espresso } {[ghc_text_or_stop "Espresso"]}

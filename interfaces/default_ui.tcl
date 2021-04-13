@@ -221,22 +221,6 @@ create_button "default_off" 1580 1440 1980 1560 $::font_tiny [::theme button_ter
 create_button "default_off" 2080 1440 2480 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); start_sleep } { [translate "Sleep"]}
 
 
-proc ghc_text_or_stop {text} {
-	if { $::de1(substate) >= 1} {
-		return [translate Stop]
-	}
-	return $text
-}
-
-proc ghc_action_or_stop {action} {
-	if { $::de1(substate) >= 1} {
-		start_idle
-		return
-	}
-	$action
-}
-
-
 ## GHC buttons
 if {$::iconik_settings(show_ghc_buttons) == 1} {
 	create_button "default_off" 2180 210 2480 390  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_espresso } {[ghc_text_or_stop "Espresso"]}

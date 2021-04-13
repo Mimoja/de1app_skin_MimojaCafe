@@ -167,6 +167,27 @@ proc iconik_status_tap {} {
 	}
 }
 
+proc ghc_text_or_stop {text} {
+	if { $::de1(substate) == 1} {
+		return [translate "Please wait"]
+	}
+	if { $::de1(substate) > 1} {
+		return [translate Stop]
+	}
+	return $text
+}
+
+proc ghc_action_or_stop {action} {
+	if { $::de1(substate) == 1} {
+		return
+	}
+	if { $::de1(substate) > 1} {
+		start_idle
+		return
+	}
+	$action
+}
+
 proc iconic_steam_tap {up} {
 
 	if {$up == "up"} {
