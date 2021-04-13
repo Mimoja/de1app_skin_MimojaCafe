@@ -350,12 +350,20 @@ proc iconik_get_steam_time {} {
 }
 
 proc iconik_final_weight {} {
-	if {$::settings(settings_profile_type) == "settings_2c"} {
-		set target $::settings(final_desired_shot_weight_advanced)
-	} else {
-		set target $::settings(final_desired_shot_weight)
+	#SAW
+	if {[::device::scale::expecting_present]} {
+		if {$::settings(settings_profile_type) == "settings_2c"} {
+			return $::settings(final_desired_shot_weight_advanced)
+		} else {
+			return $::settings(final_desired_shot_weight)
+		}
 	}
-	return $target
+	# SAV
+	if {$::settings(settings_profile_type) == "settings_2c"} {
+		return $::settings(final_desired_shot_volume_advanced)
+	} else {
+		return $::settings(final_desired_shot_volume)
+	}
 }
 
 proc iconik_get_ratio_text {} {
@@ -374,6 +382,35 @@ proc iconik_get_final_weight_text {} {
 	}
 
 	return $current
+}
+
+proc iconik_weight_change {direction} {
+
+	set change 0
+	if {$direction == "up"} {
+		set change 1
+	} else {
+		set change -1
+	}
+
+	if {[::device::scale::expecting_present]} {
+		if {$::settings(settings_profile_type) == "settings_2c"} {
+			set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) - $change}]
+		} else {
+			set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) + $change}]
+		}
+	}
+	# SAV
+	if {$::settings(settings_profile_type) == "settings_2c"} {
+		set ::settings(final_desired_shot_volume_advanced) [expr {$::settings(final_desired_shot_volume_advanced) + $change}]
+	} else {
+		set ::settings(final_desired_shot_volume) [expr {$::settings(final_desired_shot_volume) + $change}]
+	}
+
+	profile_has_changed_set
+	save_profile
+	save_settings_to_de1
+	save_settings
 }
 
 proc iconik_is_cleanup {} { return [ expr { $::iconik_settings(cleanup_profile) == $::settings(profile_filename) } ] }

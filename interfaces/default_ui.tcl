@@ -111,7 +111,7 @@ if {$::iconik_settings(create_profile_backups) == 0} {
 }
 
 ## Espresso Target Weight
-create_settings_button "default_off" 1080 30 1480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) - 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) - 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) + 1}];set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) + 1}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Bev. weight:\n [iconik_get_final_weight_text]g}
+create_settings_button "default_off" 1080 30 1480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {iconik_weight_change down} {iconik_weight_change up} {Bev. weight:\n [iconik_get_final_weight_text]g}
 
 if {$::iconik_settings(show_grinder_settings_on_main_page) == 0} {
 	## Steam
@@ -166,7 +166,7 @@ if {$::iconik_settings(always_show_temperatures) == 1} {
 	add_de1_text "default_off" $column1_pos [expr {$pos_top + (12 * $spacer)}] -justify left -anchor "nw" -text [translate "Temperature"] -font $::font_tiny -fill  [::theme button_text_light] -width [rescale_x_skin 520]
 	add_de1_variable "default_off" $column1_pos [expr {$pos_top + (13 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [::theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate Group] [group_head_heater_temperature_text]}
 	add_de1_variable "default_off" $column1_pos [expr {$pos_top + (14 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [::theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate Steam] [steamtemp_text]}
-	add_de1_variable "default_off" $column1_pos [expr {$pos_top + (15 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill  [::theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate {Tank preheat}] [return_temperature_setting_or_default_off $::settings(tank_desired_water_temperature)]}
+	add_de1_variable "default_off" $column1_pos [expr {$pos_top + (15 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny -fill  [::theme button_text_dark]  -width [rescale_x_skin 520] -textvariable {[translate {Tank preheat}] [return_temperature_setting_or_off $::settings(tank_desired_water_temperature)]}
 } else {
 	# Max pressure, min flow
 	add_de1_text "default_off" $column1_pos [expr {$pos_top + (12 * $spacer)}] -justify left -anchor "nw" -text [translate "Pressure"] -font $::font_tiny -fill  [::theme button_text_light] -width [rescale_x_skin 520]
