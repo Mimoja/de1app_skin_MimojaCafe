@@ -393,18 +393,29 @@ proc iconik_weight_change {direction} {
 		set change -1
 	}
 
+	#SAW
 	if {[::device::scale::expecting_present]} {
 		if {$::settings(settings_profile_type) == "settings_2c"} {
 			set ::settings(final_desired_shot_weight_advanced) [expr {$::settings(final_desired_shot_weight_advanced) - $change}]
+			set ::settings(final_desired_shot_weight) 0
 		} else {
 			set ::settings(final_desired_shot_weight) [expr {$::settings(final_desired_shot_weight) + $change}]
+			set ::settings(final_desired_shot_weight_advanced) 0
+
 		}
-	}
-	# SAV
-	if {$::settings(settings_profile_type) == "settings_2c"} {
-		set ::settings(final_desired_shot_volume_advanced) [expr {$::settings(final_desired_shot_volume_advanced) + $change}]
+		set ::settings(final_desired_shot_volume) 0
+		set ::settings(final_desired_shot_volume_advanced) 0
 	} else {
-		set ::settings(final_desired_shot_volume) [expr {$::settings(final_desired_shot_volume) + $change}]
+	# SAV
+		if {$::settings(settings_profile_type) == "settings_2c"} {
+			set ::settings(final_desired_shot_volume_advanced) [expr {$::settings(final_desired_shot_volume_advanced) + $change}]
+			set ::settings(final_desired_shot_volume) 0
+		} else {
+			set ::settings(final_desired_shot_volume) [expr {$::settings(final_desired_shot_volume) + $change}]
+			set ::settings(final_desired_shot_volume_advanced) 0
+		}
+		set ::settings(final_desired_shot_weight) 0
+		set ::settings(final_desired_shot_weight_advanced) 0
 	}
 
 	profile_has_changed_set
@@ -412,6 +423,39 @@ proc iconik_weight_change {direction} {
 	save_settings_to_de1
 	save_settings
 }
+
+proc iconik_set_weight {target} {
+	#SAW
+	if {[::device::scale::expecting_present]} {
+		if {$::settings(settings_profile_type) == "settings_2c"} {
+			set ::settings(final_desired_shot_weight_advanced) $target
+			set ::settings(final_desired_shot_weight) 0
+		} else {
+			set ::settings(final_desired_shot_weight) $target
+			set ::settings(final_desired_shot_weight_advanced) 0
+
+		}
+		set ::settings(final_desired_shot_volume) 0
+		set ::settings(final_desired_shot_volume_advanced) 0
+	} else {
+	# SAV
+		if {$::settings(settings_profile_type) == "settings_2c"} {
+			set ::settings(final_desired_shot_volume_advanced) $target
+			set ::settings(final_desired_shot_volume) 0
+		} else {
+			set ::settings(final_desired_shot_volume) $target
+			set ::settings(final_desired_shot_volume_advanced) 0
+		}
+		set ::settings(final_desired_shot_weight) 0
+		set ::settings(final_desired_shot_weight_advanced) 0
+	}
+
+	profile_has_changed_set
+	save_profile
+	save_settings_to_de1
+	save_settings
+}
+
 
 proc iconik_is_cleanup {} { return [ expr { $::iconik_settings(cleanup_profile) == $::settings(profile_filename) } ] }
 
