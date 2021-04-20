@@ -131,7 +131,7 @@ if {$::iconik_settings(show_grinder_settings_on_main_page) == 0} {
 
 # Recipe
 rounded_rectangle "default_off" 80 210 480 1110 [rescale_x_skin 80] [::theme button]
-add_de1_variable "default_off" [expr (80 + 480) / 2.0 ] [expr (240 + 240) / 2.0 ] -width [rescale_x_skin 380]  -text "" -font $::font_big -fill [::theme button_text_light] -anchor "n" -justify "center" -state "hidden" -textvariable {[string range $::settings(profile_title) 0 28]}
+add_de1_variable "default_off" [expr (80 + 480) / 2.0 ] [expr (240 + 240) / 2.0 ] -width [rescale_x_skin 380]  -text "" -font $::font_small -fill [::theme button_text_light] -anchor "n" -justify "center" -state "hidden" -textvariable {[string range $::settings(profile_title) 0 28]}
 add_de1_button "default_off" { say [translate "settings"] $::settings(sound_button_in); iconik_show_settings} 80 240 480 360
 
 ### TIME
