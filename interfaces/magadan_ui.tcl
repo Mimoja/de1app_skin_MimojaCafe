@@ -167,7 +167,7 @@ if {$::iconik_settings(always_show_temperatures) == 1} {
 	add_de1_text "magadan_off" $column3_pos [expr {$pos_top + (0 * $spacer)}] -justify left -anchor "nw" -text [translate "Pressure"] -font $::font_tiny -fill  [::theme background_text] -width [rescale_x_skin 520]
 	add_de1_variable "magadan_off" $column3_pos [expr {$pos_top + (1 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [::theme background_text]  -width [rescale_x_skin 520] -textvariable {[round_to_one_digits $::de1(pressure)] bar ([iconik_get_max_pressure] peak)}
 	add_de1_text "magadan_off" $column3_pos [expr {$pos_top + (2 * $spacer)}] -justify left -anchor "nw" -text [translate Flow] -font $::font_tiny -fill  [::theme background_text] -width [rescale_x_skin 520]
-	add_de1_variable "magadan_off" $column3_pos [expr {$pos_top + (3 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [::theme background_text]  -width [rescale_x_skin 520] -textvariable {[round_to_one_digits $::de1(flow)] ml/s ([iconik_get_min_flow] min)}
+	add_de1_variable "magadan_off" $column3_pos [expr {$pos_top + (3 * $spacer)}] -justify left -anchor "nw" -text "" -font $::font_tiny  -fill  [::theme background_text]  -width [rescale_x_skin 520] -textvariable {[round_to_one_digits $::de1(flow)] mL/s ([iconik_get_min_flow] min)}
 }
 
 # Presets
@@ -250,7 +250,7 @@ add_de1_widget "magadan_off" graph 510 280 {
 	$widget element create line2_espresso_pressure -xdata espresso_elapsed -ydata espresso_pressure -symbol none -label "" -linewidth [rescale_x_skin 12] -color [::theme primary]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_pressure);
 	set flow_axis y
 	if {$::iconik_settings(seperate_flow_axis)} {
-		$widget axis configure y2 -color [::theme secondary] -tickfont Helv_6 -min 0.0 -max [expr {$::iconik_settings(y_axis_scale) / 3 * 2}] -subdivisions 0 -majorticks {0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8} -title [translate {Flow [ml/s]}] -titlecolor [::theme secondary] -hide 0;
+		$widget axis configure y2 -color [::theme secondary] -tickfont Helv_6 -min 0.0 -max [expr {$::iconik_settings(y_axis_scale) / 3 * 2}] -subdivisions 0 -majorticks {0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8} -title [translate {Flow [mL/s]}] -titlecolor [::theme secondary] -hide 0;
 		set flow_axis y2
 	}
 
