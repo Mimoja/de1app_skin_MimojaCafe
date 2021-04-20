@@ -111,11 +111,11 @@ array set ::cocoa_theme {
 }
 
 # fonts
-set ::font_tiniest [get_font "Mazzard Regular" 10]
-set ::font_tinier [get_font "Mazzard Regular" 12]
-set ::font_tiny [get_font "Mazzard Regular" 14]
-set ::font_small [get_font "Mazzard Regular" 16]
-set ::font_big [get_font "Mazzard Regular" 18]
+set ::font_tiniest [get_font "Mazzard Regular" 13]
+set ::font_tinier [get_font "Mazzard Regular" 15]
+set ::font_tiny [get_font "Mazzard Regular" 16]
+set ::font_small [get_font "Mazzard Regular" 18]
+set ::font_big [get_font "Mazzard Regular" 22]
 set ::font_tiny_icon [get_font "Font Awesome 5 Free-Solid-900" 16]
 set ::font_small_icon [get_font "Font Awesome 5 Free-Solid-900" 18]
 set ::font_big_icon [get_font "Font Awesome 5 Free-Solid-900" 22]
