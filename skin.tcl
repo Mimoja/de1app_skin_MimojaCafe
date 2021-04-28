@@ -1,9 +1,10 @@
 package require de1plus 1.0
+package require de1_plugins
 
 source "[homedir]/skins/default/standard_includes.tcl"
 
-set ::skindebug 0
-set ::debugging 0
+set ::skindebug 1
+set ::debugging 1
 set ::history_to_restore_after_cleanup {}
 
 namespace eval ::skin::mimojacafe::graph {}
@@ -23,13 +24,17 @@ proc iconik_wakeup {} {
 	start_idle
 }
 
+proc iconik_DYE_supported {} {
+	return [plugins enabled "DYE"]
+}
 
 source "[skin_directory]/interfaces/default_ui.tcl"
 source "[skin_directory]/interfaces/magadan_ui.tcl"
 
-# History Page
-source "[skin_directory]/history_viewer.tcl"
-
+# History Page when no DYE is supported
+if {![iconik_DYE_supported]} {
+	source "[skin_directory]/history_viewer.tcl"
+}
 # Settings Page
 source "[skin_directory]/interfaces/default_settings_screen.tcl"
 
@@ -75,6 +80,7 @@ if {[info exists ::settings(grinder_setting)] != 1 || $::settings(grinder_settin
 if {[info exists ::settings(grinder_dose_weight)] != 1 || $::settings(grinder_dose_weight) == {}} {
 	set ::settings(grinder_dose_weight) 0
 }
+
 
 #dont change page on state change
 proc skins_page_change_due_to_de1_state_change { textstate } {
@@ -159,6 +165,10 @@ proc iconik_get_status_text {} {
 		}
 	}
 
+}
+
+proc show_DYE_page {} {
+	dui page load DYE current
 }
 
 proc iconik_status_tap {} {
@@ -252,7 +262,6 @@ proc iconik_is_steam_chosen { slot } {
 		return {}
 	}
 }
-
 
 proc iconik_toggle_steam_settings {slot} {
 
