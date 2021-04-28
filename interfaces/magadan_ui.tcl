@@ -128,7 +128,7 @@ create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 8 * ($l_btn
 create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 3 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 3 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] {set ::settings(water_volume) [expr {$::settings(water_volume) - 5}]; de1_send_steam_hotwater_settings; save_settings} {  set ::settings(water_volume) [expr {$::settings(water_volume) + 5}]; de1_send_steam_hotwater_settings; save_settings} {Water [iconik_water_temperature]:\n[round_to_integer $::settings(water_volume)]ml}
 
 # Grind Settings - 5,6
-create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 5 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 5 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] { set ::settings(grinder_dose_weight) [expr {$::settings(grinder_dose_weight) - 0.5}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [expr {$::settings(grinder_dose_weight) + 0.5}]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n $::settings(grinder_dose_weight) ([iconik_get_ratio_text])}
+create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 5 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 5 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] { set ::settings(grinder_dose_weight) [round_one_digits [expr {$::settings(grinder_dose_weight) - 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [round_one_digits  [expr {$::settings(grinder_dose_weight) + 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n $::settings(grinder_dose_weight) ([iconik_get_ratio_text])}
 ## Show clock
 create_button "magadan_off" [expr 2560 - 50 - $l_btn_width] $l_btn_top [expr 2560 - 50] [expr {$l_btn_top + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] {} { [time_format [clock seconds] 1]}
 create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 6 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 6 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light]  { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) - 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) + 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Grinder Setting:\n $::settings(grinder_setting)}
@@ -260,10 +260,6 @@ add_de1_widget "magadan_off" graph 510 280 {
 		set flow_axis y2
 	}
 
-	if {$::settings(display_pressure_delta_line) == 1} {
-		$widget element create line_espresso_pressure_delta_1  -xdata espresso_elapsed -ydata espresso_pressure_delta -symbol none -label "" -linewidth [rescale_x_skin 2] -color [::theme primary_dark] -pixels 0 -smooth $::settings(live_graph_smoothing_technique)
-	}
-
 	if {$::iconik_settings(always_show_temperatures)} {
 		$widget axis create temp
 		$widget axis configure temp -color [::theme background_text] -min 0.0 -max [expr {$::iconik_settings(y_axis_scale) * 10}]
@@ -275,18 +271,22 @@ add_de1_widget "magadan_off" graph 510 280 {
 		$widget element create line_espresso_de1_explanation_chart_temp -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_temperature -mapy temp -label "" -linewidth [rescale_x_skin 15] -color #ff888c  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0; 
 	}
 
+	if {$::settings(display_pressure_delta_line) == 1} {
+		$widget element create line_espresso_pressure_delta_1  -xdata espresso_elapsed -ydata espresso_pressure_delta -symbol none -label "" -linewidth [rescale_x_skin 2] -color [::theme primary_dark] -pixels 0 -smooth $::settings(live_graph_smoothing_technique)
+	}
+
 	$widget element create line_espresso_flow_goal  -xdata espresso_elapsed -ydata espresso_flow_goal -mapy $flow_axis -symbol none -label "" -linewidth [rescale_x_skin 8] -color [::theme secondary_light] -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes {5 5};
 	$widget element create line_espresso_flow  -xdata espresso_elapsed -ydata espresso_flow -mapy $flow_axis -symbol none -label "" -linewidth [rescale_x_skin 12] -color  [::theme secondary] -smooth $::settings(live_graph_smoothing_technique) -pixels 0  -dashes $::settings(chart_dashes_flow);
 	$widget element create god_line_espresso_flow  -xdata espresso_elapsed -ydata god_espresso_flow -mapy $flow_axis -symbol none -label "" -linewidth [rescale_x_skin 24] -color #e4edff -smooth $::settings(live_graph_smoothing_technique) -pixels 0;
 
 	if {$::settings(chart_total_shot_flow) == 1} {
-		$widget element create line_espresso_total_flow  -xdata espresso_elapsed -ydata espresso_water_dispensed -symbol none -label "" -linewidth [rescale_x_skin 6] -color #98c5ff -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_espresso_weight);
+		$widget element create line_espresso_total_flow  -xdata espresso_elapsed -ydata espresso_water_dispensed -mapy $flow_axis -symbol none -label "" -linewidth [rescale_x_skin 6] -color #98c5ff -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_espresso_weight);
 	}
 
 	if {$::settings(scale_bluetooth_address) != ""} {
 		$widget element create line_espresso_flow_weight  -xdata espresso_elapsed -ydata espresso_flow_weight -mapy $flow_axis -symbol none -label "" -linewidth [rescale_x_skin 8] -color #a2693d -smooth $::settings(live_graph_smoothing_technique) -pixels 0;
 		$widget element create line_espresso_flow_weight_raw  -xdata espresso_elapsed -ydata espresso_flow_weight_raw -mapy $flow_axis -symbol none -label "" -linewidth [rescale_x_skin 2] -color #f8b888 -smooth $::settings(live_graph_smoothing_technique) -pixels 0 ;
-		$widget element create god_line_espresso_flow_weight  -xdata espresso_elapsed -ydata god_espresso_flow_weight -symbol none -label "" -linewidth [rescale_x_skin 16] -color #edd4c1 -smooth $::settings(live_graph_smoothing_technique) -pixels 0;
+		$widget element create god_line_espresso_flow_weight  -xdata espresso_elapsed -ydata god_espresso_flow_weight -mapy $flow_axis -symbol none -label "" -linewidth [rescale_x_skin 16] -color #edd4c1 -smooth $::settings(live_graph_smoothing_technique) -pixels 0;
 
 		if {$::settings(chart_total_shot_weight) == 1 || $::settings(chart_total_shot_weight) == 2} {
 			$widget element create line_espresso_weight  -xdata espresso_elapsed -ydata espresso_weight_chartable -symbol none -label "" -linewidth [rescale_x_skin 6] -color #f8b888 -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_espresso_weight);
