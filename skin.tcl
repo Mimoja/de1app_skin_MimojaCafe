@@ -3,8 +3,8 @@ package require de1_plugins
 
 source "[homedir]/skins/default/standard_includes.tcl"
 
-set ::skindebug 1
-set ::debugging 1
+set ::skindebug 0
+set ::debugging 0
 set ::history_to_restore_after_cleanup {}
 
 namespace eval ::skin::mimojacafe::graph {}
@@ -14,7 +14,7 @@ source "[skin_directory]/settings.tcl"
 iconik_load_settings
 iconik_save_settings
 
-set ::version_string "Version 1.6-$::iconik_settings(ui)"
+set ::version_string "Version 1.6.1-$::iconik_settings(ui)"
 
 source "[skin_directory]/framework.tcl"
 
@@ -31,10 +31,6 @@ proc iconik_DYE_supported {} {
 source "[skin_directory]/interfaces/default_ui.tcl"
 source "[skin_directory]/interfaces/magadan_ui.tcl"
 
-# History Page when no DYE is supported
-if {![iconik_DYE_supported]} {
-	source "[skin_directory]/history_viewer.tcl"
-}
 # Settings Page
 source "[skin_directory]/interfaces/default_settings_screen.tcl"
 

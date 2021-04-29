@@ -218,7 +218,7 @@ create_button "default_off" 80 1440 480 1560    $::font_tiny [::theme button_ter
 if {[iconik_DYE_supported]} {
 	create_button "default_off" 580 1440 980 1560   $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_DYE_page} {[translate "Describe"]}
 } else {
-	create_button "default_off" 580 1440 980 1560   $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_history_page} {[translate "History"]}
+	create_button "default_off" 580 1440 980 1560   $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); ::history_viewer::open} {[translate "History"]}
 }
 create_button "default_off" 1080 1440 1480 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_toggle_cleaning } { [translate "Clean"]} 
 create_button "default_off" 1580 1440 1980 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_select_profile } {[translate "Settings"]}

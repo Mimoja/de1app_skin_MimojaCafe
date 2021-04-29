@@ -207,7 +207,7 @@ if {[iconik_DYE_supported]} {
 	create_button "magadan_off" [expr {$b_btn_hpos_r - 4 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 4 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_DYE_page } {\uf1da}
 } else {
 	# History
-	create_button "magadan_off" [expr {$b_btn_hpos_r - 4 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 4 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_history_page } {\uf1da}
+	create_button "magadan_off" [expr {$b_btn_hpos_r - 4 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 4 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); ::history_viewer::open } {\uf1da}
 }
 # Clean
 create_button "magadan_off" [expr {$b_btn_hpos_r - 3 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 3 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_toggle_cleaning } {\uf51a}
