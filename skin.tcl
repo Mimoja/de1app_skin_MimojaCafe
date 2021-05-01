@@ -144,8 +144,14 @@ proc iconik_get_status_text {} {
 		}
 		4 {
 			return [translate "Preinfusion"]
+			if {$::iconik_settings(enable_next_step_tap)} {
+				return [translate "Preinfusion\nTap to move on"]
+			}
 		}
 		5 {
+			if {$::iconik_settings(enable_next_step_tap)} {
+				return [translate "Pouring\nTap to move on"]
+			}
 			return [translate "Pouring"]
 		}
 		6 {
@@ -170,6 +176,12 @@ proc show_DYE_page {} {
 proc iconik_status_tap {} {
 	if {$::de1(scale_device_handle) == 0 && $::settings(scale_bluetooth_address) != ""} {
 		ble_connect_to_scale
+	}
+
+	if {$::de1_num_state($::de1(state)) == "Espresso" && $::iconik_settings(enable_next_step_tap)} {
+		if {$::de1_substate_types($::de1(substate)) == "preinfusion" ||  $::de1_substate_types($::de1(substate)) != "pouring"} {
+			start_next_step
+		}
 	}
 }
 

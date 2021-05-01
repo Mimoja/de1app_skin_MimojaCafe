@@ -141,6 +141,7 @@ array set ::iconik_settings {
     show_steam 0
     show_ghc_buttons 0
     steam_presets_enabled 1
+    enable_next_step_tap 0
     show_grinder_settings_on_main_page 0
     show_clock_on_main_page 0
     small_mug_setting 0
@@ -156,7 +157,6 @@ array set ::iconik_settings {
     show_ml_instead_of_water_level 1
     water_temperature_overwride 95
     seperate_flow_axis 0
-
 
     y_axis_scale 12
     max_history_items 100
