@@ -31,6 +31,9 @@ proc iconik_DYE_supported {} {
 source "[skin_directory]/interfaces/default_ui.tcl"
 source "[skin_directory]/interfaces/magadan_ui.tcl"
 
+source "[skin_directory]/theme.tcl"
+init_MimojaCafe_dui_theme
+
 # Settings Page
 source "[skin_directory]/interfaces/default_settings_screen.tcl"
 
