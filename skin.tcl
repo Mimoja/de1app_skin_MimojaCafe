@@ -272,6 +272,7 @@ proc iconik_is_steam_chosen { slot } {
 	}
 }
 
+
 proc iconik_toggle_steam_settings {slot} {
 
 	set new_steam_timeout [dict get $::iconik_settings(steam_profiles) $slot timeout]

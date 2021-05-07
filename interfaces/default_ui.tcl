@@ -101,7 +101,7 @@ if {$::iconik_settings(show_water_level_indicator) == 1} {
 rectangle "default_off" 0 0 2560 180 [::theme background_highlight]
 
 ## Flush
-create_settings_button "default_off" 80 30 480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light]  {set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) - 0.5}]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) + 0.5}]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
+create_settings_button "default_off" 80 30 480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light]  {set ::iconik_settings(flush_timeout) [round_one_digits [expr {$::iconik_settings(flush_timeout) - 0.5}]]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [round_one_digits [expr {$::iconik_settings(flush_timeout) + 0.5}]]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
 
 ## Espresso Temperature
 if {$::iconik_settings(create_profile_backups) == 0} {
@@ -117,10 +117,10 @@ if {$::iconik_settings(show_grinder_settings_on_main_page) == 0} {
 	## Steam
 	create_settings_button "default_off" 1580 30 1980 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {iconic_steam_tap down} {iconic_steam_tap up} {Steam $::iconik_settings(steam_active_slot):\n[iconik_get_steam_time]}
 	## Water Volume
-	create_settings_button "default_off" 2080 30 2480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {set ::settings(water_volume) [expr {$::settings(water_volume) - 5}]; de1_send_steam_hotwater_settings; save_settings} {  set ::settings(water_volume) [expr {$::settings(water_volume) + 5}]; de1_send_steam_hotwater_settings; save_settings} {Water [iconik_water_temperature]:\n[round_to_integer $::settings(water_volume)]ml}
+	create_settings_button "default_off" 2080 30 2480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {set ::settings(water_volume) [round_one_digits [expr {$::settings(water_volume) - 5}]]; de1_send_steam_hotwater_settings; save_settings} {  set ::settings(water_volume) [round_one_digits [expr {$::settings(water_volume) + 5}]]; de1_send_steam_hotwater_settings; save_settings} {Water [iconik_water_temperature]:\n[round_to_integer $::settings(water_volume)]ml}
 } else {
 	# Grind Settings
-	create_settings_button "default_off" 1580 30 1980 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] { set ::settings(grinder_dose_weight)  [round_one_digits [expr {$::settings(grinder_dose_weight) - 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [ [round_one_digits expr {$::settings(grinder_dose_weight) + 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n $::settings(grinder_dose_weight) ([iconik_get_ratio_text])}
+	create_settings_button "default_off" 1580 30 1980 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] { set ::settings(grinder_dose_weight)  [round_one_digits [expr {$::settings(grinder_dose_weight) - 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [ [round_one_digits expr {$::settings(grinder_dose_weight) + 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n [round_one_digits $::settings(grinder_dose_weight)] ([iconik_get_ratio_text])}
 	if {$::iconik_settings(show_clock_on_main_page) == 1} {
 		## Show clock
 		create_button "default_off" 2080 30 2480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {} { [time_format [clock seconds] 1]}
