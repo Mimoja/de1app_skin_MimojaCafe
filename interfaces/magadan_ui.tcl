@@ -106,7 +106,7 @@ set l_btn_left 50
 set l_btn_spacer 40
 
 ## Flush - 4
-create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 4 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 4 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light]  {set ::iconik_settings(flush_timeout) [round_one_digits [expr {$::iconik_settings(flush_timeout) - 0.5}]]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [expr {$::iconik_settings(flush_timeout) + 0.5}]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
+create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 4 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 4 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light]  {set ::iconik_settings(flush_timeout) [round_one_digits [expr {$::iconik_settings(flush_timeout) - 0.5}]]; iconik_save_settings} {  set ::iconik_settings(flush_timeout) [round_one_digits [expr {$::iconik_settings(flush_timeout) + 0.5}]]; iconik_save_settings} {Flush:\n[round_to_one_digits $::iconik_settings(flush_timeout)]s}
 
 ## Espresso Temperature - 2
 if {$::iconik_settings(create_profile_backups) == 0} {
