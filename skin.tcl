@@ -241,10 +241,26 @@ proc iconik_temperature_adjust {up} {
 		array set ::current_adv_step [lindex $::settings(advanced_shot) 0]
 
 	} else {
-		if {$up == "up"} {
-			set ::settings(espresso_temperature) [expr {$::settings(espresso_temperature) + 0.5}]
+		if {[ifexists ::settings(espresso_temperature_steps_enabled)] == 1} {
+			if {$up == "up"} {				
+				set ::settings(espresso_temperature_0) [expr {$::settings(espresso_temperature_0) + 0.5}]
+				set ::settings(espresso_temperature_1) [expr {$::settings(espresso_temperature_1) + 0.5}]
+				set ::settings(espresso_temperature_2) [expr {$::settings(espresso_temperature_2) + 0.5}]
+				set ::settings(espresso_temperature_3) [expr {$::settings(espresso_temperature_3) + 0.5}]
+				set ::settings(espresso_temperature) $::settings(espresso_temperature_0)
+			} else {
+				set ::settings(espresso_temperature_0) [expr {$::settings(espresso_temperature_0) - 0.5}]
+				set ::settings(espresso_temperature_1) [expr {$::settings(espresso_temperature_1) - 0.5}]
+				set ::settings(espresso_temperature_2) [expr {$::settings(espresso_temperature_2) - 0.5}]
+				set ::settings(espresso_temperature_3) [expr {$::settings(espresso_temperature_3) - 0.5}]
+				set ::settings(espresso_temperature) $::settings(espresso_temperature_0)
+			}
 		} else {
-			set ::settings(espresso_temperature) [expr {$::settings(espresso_temperature) - 0.5}]
+			if {$up == "up"} {
+				set ::settings(espresso_temperature) [expr {$::settings(espresso_temperature) + 0.5}]
+			} else {
+				set ::settings(espresso_temperature) [expr {$::settings(espresso_temperature) - 0.5}]
+			}
 		}
 	}
 	profile_has_changed_set;
