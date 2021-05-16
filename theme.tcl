@@ -13,22 +13,22 @@ proc init_MimojaCafe_dui_theme {} {
 		font.font_family "Mazzard Regular"
 		font.font_size $default_font_size
 		
-		text.font_family "Mazzard Regular"
-		text.font_size $default_font_size
-		text.fill [::theme background_text]
-		text.disabledfill $disabled_colour
-		text.anchor nw
-		text.justify left
+		dtext.font_family "Mazzard Regular"
+		dtext.font_size $default_font_size
+		dtext.fill [::theme background_text]
+		dtext.disabledfill $disabled_colour
+		dtext.anchor nw
+		dtext.justify left
 		
-		text.fill.remark [::theme secondary]
-		text.fill.error [::theme secondary_light]
-		text.font_family.section_title "Mazzard Regular"
+		dtext.fill.remark [::theme secondary]
+		dtext.fill.error [::theme secondary_light]
+		dtext.font_family.section_title "Mazzard Regular"
 		
-		text.font_family.page_title "Mazzard Regular"
-		text.font_size.page_title 24
-		text.fill.page_title [::theme background_text]
-		text.anchor.page_title center
-		text.justify.page_title center
+		dtext.font_family.page_title "Mazzard Regular"
+		dtext.font_size.page_title 24
+		dtext.fill.page_title [::theme background_text]
+		dtext.anchor.page_title center
+		dtext.justify.page_title center
 	
 		symbol.font_family "Font Awesome 5 Pro-Regular-400"
 		symbol.font_size 20
@@ -197,6 +197,11 @@ proc init_MimojaCafe_dui_theme {} {
 		graph.plotrelief raised
 		graph.plotpady 0 
 		graph.plotpadx 10
+		
+		text.bg [::theme background]
+		text.font_size 16
+		text.relief flat
+		text.highlightthickness 1
 	}]
 	
 	# Styles for the history viewer
