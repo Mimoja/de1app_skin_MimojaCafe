@@ -249,7 +249,7 @@ if {$::iconik_settings(show_steam) == 1} {
 }
 add_de1_widget "default_off" graph 580 230 {
 
-	set ::skin::mimojacafe::graph::espresso $widget
+	set ::skin::mimojacafe::graph::espresso_default $widget
 
 	# configure axes
 	$widget axis configure x -color [::theme background_text] -tickfont Helv_6;
@@ -318,7 +318,7 @@ add_de1_widget "default_off" graph 580 230 {
 if {$::iconik_settings(show_steam) == 1} {
 	add_de1_widget "default_off" graph 580 830 {
 
-		set ::skin::mimojacafe::graph::steam $widget
+		set ::skin::mimojacafe::graph::steam_default $widget
 
 		if {$::iconik_settings(show_steam_grid_lines) != 1} {
 			$widget grid configure -hide yes
