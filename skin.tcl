@@ -146,16 +146,10 @@ proc iconik_get_status_text {} {
 			return [translate "Stabilising"]
 		}
 		4 {
-			if {$::iconik_settings(enable_next_step_tap) == 1} {
-				return [translate "Preinfusion\nTap to move on"]
-			}
-			return [translate "Preinfusion"]
+			return [translate "Preinfusion\nTap to move on"]
 		}
 		5 {
-			if {$::iconik_settings(enable_next_step_tap) == 1} {
-				return [translate "Pouring\nTap to move on"]
-			}
-			return [translate "Pouring"]
+			return [translate "Pouring\nTap to move on"]
 		}
 		6 {
 			return [translate "Ending"]
@@ -181,7 +175,7 @@ proc iconik_status_tap {} {
 		ble_connect_to_scale
 	}
 
-	if {$::de1_num_state($::de1(state)) == "Espresso" && $::iconik_settings(enable_next_step_tap) == 1} {
+	if {$::de1_num_state($::de1(state)) == "Espresso"} {
 		start_next_step
 	}
 }
