@@ -267,7 +267,7 @@ add_de1_widget "default_off" graph 580 230 {
 	}
 	# create lines
 	$widget element create line_espresso_pressure_goal -xdata espresso_elapsed -ydata espresso_pressure_goal -symbol none -label "" -linewidth [rescale_x_skin 8] -color [::theme primary_light]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes {5 5};
-	$widget element create line2_espresso_pressure -xdata espresso_elapsed -ydata espresso_pressure -symbol none -label "" -linewidth [rescale_x_skin 12] -color [::theme primary]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_pressure);
+	$widget element create line_espresso_pressure -xdata espresso_elapsed -ydata espresso_pressure -symbol none -label "" -linewidth [rescale_x_skin 12] -color [::theme primary]  -smooth $::settings(live_graph_smoothing_technique) -pixels 0 -dashes $::settings(chart_dashes_pressure);
 
 	if {$::settings(display_pressure_delta_line) == 1} {
 		$widget element create line_espresso_pressure_delta_1  -xdata espresso_elapsed -ydata espresso_pressure_delta -symbol none -label "" -linewidth [rescale_x_skin 2] -color [::theme primary_dark] -pixels 0 -smooth $::settings(live_graph_smoothing_technique)
@@ -307,10 +307,10 @@ add_de1_widget "default_off" graph 580 230 {
 	
 	
 	# show the explanation for pressure
-	$widget element create line_espresso_de1_explanation_chart_pressurec -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_pressure  -label "" -linewidth [rescale_x_skin 16] -color [::theme primary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
+	$widget element create line_espresso_pressure_explanation -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_pressure  -label "" -linewidth [rescale_x_skin 16] -color [::theme primary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
 	
 	# show the explanation for flow
-	$widget element create line_espresso_de1_explanation_chart_flowc -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_flow -mapy $flow_axis  -label "" -linewidth [rescale_x_skin 18] -color [::theme secondary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
+	$widget element create line_espresso_flow_explanation -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_flow -mapy $flow_axis  -label "" -linewidth [rescale_x_skin 18] -color [::theme secondary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
 	
 } -plotbackground [::theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin $espresso_graph_height] -borderwidth 1 -background [::theme background] -plotrelief flat -plotpady 0 -plotpadx 10
 

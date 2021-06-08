@@ -141,7 +141,6 @@ array set ::iconik_settings {
     show_steam 0
     show_ghc_buttons 0
     steam_presets_enabled 1
-    enable_next_step_tap 0
     show_grinder_settings_on_main_page 0
     show_clock_on_main_page 0
     small_mug_setting 0
