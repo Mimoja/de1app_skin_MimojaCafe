@@ -73,9 +73,9 @@ proc init_MimojaCafe_dui_theme {} {
 		dbutton_symbol.fill [::theme button_text_light]
 		dbutton_symbol.disabledfill [::theme primary_dark]
 		
-		dbutton.shape.insight_ok outline
+		dbutton.shape.insight_ok round
 		dbutton.width.insight_ok 4
-		dbutton.arc_offset.insight_ok 20
+		dbutton.radius.insight_ok 30
 		dbutton.bwidth.insight_ok 480
 		dbutton.bheight.insight_ok 118
 		dbutton_label.font_family.insight_ok "Mazzard Regular"
@@ -93,7 +93,6 @@ proc init_MimojaCafe_dui_theme {} {
 		dclicker_label.fill [::theme background_text]
 		dclicker_label.anchor center
 		dclicker_label.justify center
-	
 	
 		entry.relief sunken
 		entry.bg [::theme background]
@@ -117,8 +116,18 @@ proc init_MimojaCafe_dui_theme {} {
 		dcombobox.font_family "Mazzard Regular"
 		dcombobox.font_size $default_font_size
 		
-		dcombobox_ddarrow.font_size 24
-		dcombobox_ddarrow.disabledfill $disabled_colour
+		dbutton_dda.shape {}
+		dbutton_dda.fill {}
+		dbutton_dda.bwidth 70
+		dbutton_dda.bheight 65
+		dbutton_dda.symbol "sort-down"
+		
+		dbutton_dda_symbol.pos {0.5 0.15}
+		dbutton_dda_symbol.font_size 24
+		dbutton_dda_symbol.anchor center
+		dbutton_dda_symbol.justify center
+		dbutton_dda_symbol.fill [::theme background_text]
+		dbutton_dda_symbol.disabledfill $disabled_colour
 		
 		dcheckbox.font_family "Font Awesome 5 Pro"
 		dcheckbox.font_size 18
@@ -202,6 +211,28 @@ proc init_MimojaCafe_dui_theme {} {
 		text.font_size 16
 		text.relief flat
 		text.highlightthickness 1
+		
+		dbutton.shape.dne_clicker round 
+		dbutton.bwidth.dne_clicker 120 
+		dbutton.bheight.dne_clicker 140 
+		dbutton.radius.dne_clicker 20 
+		dbutton.anchor.dne_clicker center
+		dbutton_symbol.pos.dne_clicker {0.5 0.4} 
+		dbutton_symbol.anchor.dne_clicker center 
+		dbutton_symbol.font_size.dne_clicker 20
+		dbutton_label.pos.dne_clicker {0.5 0.8} 
+		dbutton_label.font_size.dne_clicker 10 
+		dbutton_label.anchor.dne_clicker center
+
+		dbutton.shape.dne_pad_button round 
+		dbutton.bwidth.dne_pad_button 280 
+		dbutton.bheight.dne_pad_button 220 
+		dbutton.radius.dne_pad_button 20 
+		dbutton.anchor.dne_pad_button nw
+		dbutton_label.pos.dne_pad_button {0.5 0.5} 
+		dbutton_label.font_family.dne_pad_button notosansuibold 
+		dbutton_label.font_size.dne_pad_button 24 
+		dbutton_label.anchor.dne_pad_button center		
 	}]
 	
 	# Styles for the history viewer
