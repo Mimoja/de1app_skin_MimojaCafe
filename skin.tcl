@@ -24,8 +24,11 @@ proc iconik_wakeup {} {
 	start_idle
 }
 
-proc iconik_DYE_supported {} {
-	return [plugins enabled "DYE"]
+if { [plugins available DYE] } {
+	if { [plugins available SDB] } {
+		plugins enable SDB
+	}
+	plugins enable DYE
 }
 
 source "[skin_directory]/interfaces/default_ui.tcl"
