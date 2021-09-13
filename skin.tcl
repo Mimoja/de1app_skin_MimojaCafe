@@ -14,7 +14,7 @@ source "[skin_directory]/settings.tcl"
 iconik_load_settings
 iconik_save_settings
 
-set ::version_string "Version 1.6.1-$::iconik_settings(ui)"
+set ::version_string "Version 1.7-$::iconik_settings(ui)"
 
 source "[skin_directory]/framework.tcl"
 
