@@ -9,7 +9,13 @@ proc init_MimojaCafe_dui_theme {} {
 	dui aspect set [subst {
 		page.bg_img {}
 		page.bg_color [::theme background]
-	
+
+		dialog_page.bg_shape round_outline
+		dialog_page.bg_color [::theme button]
+		dialog_page.fill [::theme button]
+		dialog_page.outline [::theme background_text]
+		dialog_page.width 1
+		
 		font.font_family "Mazzard Regular"
 		font.font_size $default_font_size
 		
@@ -81,8 +87,8 @@ proc init_MimojaCafe_dui_theme {} {
 		dbutton_label.font_family.insight_ok "Mazzard Regular"
 		dbutton_label.font_size.insight_ok 19
 		
-		dclicker.fill [::theme background]
-		dclicker.disabledfill [::theme background_highlight]
+		dclicker.fill {}
+		dclicker.disabledfill {}
 		dclicker_label.pos {0.525 0.4}
 		dclicker_symbol.pos {0.075 0.0}
 		dclicker_symbol1.pos {0.275 0.0}
@@ -109,6 +115,7 @@ proc init_MimojaCafe_dui_theme {} {
 		multiline_entry.font_size $default_font_size
 		multiline_entry.width 15
 		multiline_entry.height 5
+		multiline_entry.wrap word
 	
 		dcombobox.relief sunken
 		dcombobox.bg [::theme background]
@@ -211,6 +218,7 @@ proc init_MimojaCafe_dui_theme {} {
 		text.font_size 16
 		text.relief flat
 		text.highlightthickness 1
+		text.wrap word
 		
 		dbutton.shape.dne_clicker round 
 		dbutton.bwidth.dne_clicker 120 
@@ -232,11 +240,51 @@ proc init_MimojaCafe_dui_theme {} {
 		dbutton_label.pos.dne_pad_button {0.5 0.5} 
 		dbutton_label.font_family.dne_pad_button notosansuibold 
 		dbutton_label.font_size.dne_pad_button 24 
-		dbutton_label.anchor.dne_pad_button center		
+		dbutton_label.anchor.dne_pad_button center
 	}]
 	
 	# Styles for the history viewer
 	dui aspect set [subst {
 		dbutton.fill.hv_done_button [::theme button_tertiary]
 	}]
+	
+	# Menu dialogs
+	dui aspect set [subst {
+		dtext.font_size.menu_dlg_title +1
+		dtext.anchor.menu_dlg_title center
+		dtext.justify.menu_dlg_title center
+		dtext.fill.menu_dlg_title [::theme button_text_light]
+		
+		dbutton.shape.menu_dlg_close rect 
+		dbutton.fill.menu_dlg_close {} 
+		dbutton.symbol.menu_dlg_close times
+		dbutton_symbol.pos.menu_dlg_close {0.5 0.5}
+		dbutton_symbol.anchor.menu_dlg_close center
+		dbutton_symbol.justify.menu_dlg_close center
+		dbutton_symbol.fill.menu_dlg_close [::theme button_text_light]
+		
+		dbutton.shape.menu_dlg_btn rect
+		dbutton.fill.menu_dlg_btn {}
+		dbutton.disabledfill.menu_dlg_btn {}
+		dbutton_label.pos.menu_dlg_btn {0.3 0.4} 
+		dbutton_label.anchor.menu_dlg_btn w
+		dbutton_label.fill.menu_dlg_btn [::theme button_text_light]
+		dbutton_label.disabledfill.menu_dlg_btn $disabled_colour
+		
+		dbutton_label1.pos.menu_dlg_btn {0.3 0.78} 
+		dbutton_label1.anchor.menu_dlg_btn w
+		dbutton_label1.fill.menu_dlg_btn #bbb
+		dbutton_label1.disabledfill.menu_dlg_btn $disabled_colour
+		dbutton_label1.font_size.menu_dlg_btn -3
+		
+		dbutton_symbol.pos.menu_dlg_btn {0.18 0.5} 
+		dbutton_symbol.anchor.menu_dlg_btn center
+		dbutton_symbol.fill.menu_dlg_btn [::theme button_text_light]
+		dbutton_symbol.disabledfill.menu_dlg_btn $disabled_colour
+		
+		line.fill.menu_dlg_sepline #ddd
+		line.width.menu_dlg_sepline 1 
+	}]
+	
+	
 }
