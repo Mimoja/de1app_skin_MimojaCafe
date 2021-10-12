@@ -24,13 +24,17 @@ proc iconik_wakeup {} {
 	start_idle
 }
 
-if { [plugins available DYE] } {
-	if { [plugins available SDB] } {
-		plugins enable SDB
-	}
-	plugins enable DYE
-}
+catch {
+	package require sqlite3
 
+	if { [plugins available DYE] } {
+		if { [plugins available SDB] } {
+			plugins enable SDB
+		}
+		plugins enable DYE
+		dui page load DYE current -theme MimojaCafe
+	}
+}
 source "[skin_directory]/interfaces/default_ui.tcl"
 source "[skin_directory]/interfaces/magadan_ui.tcl"
 
@@ -170,7 +174,7 @@ proc iconik_get_status_text {} {
 }
 
 proc show_DYE_page {} {
-	dui page load DYE current
+    dui page load DYE current -theme MimojaCafe
 }
 
 proc iconik_status_tap {} {
