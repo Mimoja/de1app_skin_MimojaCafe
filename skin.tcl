@@ -432,9 +432,9 @@ proc iconik_get_ratio_text {} {
 proc iconik_get_final_weight_text {} {
 	set target [iconik_final_weight]
 
-	set current "$target"
+	set current "$target ml"
 	if {[::device::scale::is_connected]} {
-		set current "$::de1(scale_weight) / $current"
+		set current "$::de1(scale_weight)g / $current g"
 	}
 
 	return $current
