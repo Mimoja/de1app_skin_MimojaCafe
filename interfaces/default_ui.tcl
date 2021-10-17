@@ -111,7 +111,7 @@ if {$::iconik_settings(create_profile_backups) == 0} {
 }
 
 ## Espresso Target Weight
-create_settings_button "default_off" 1080 30 1480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {iconik_weight_change down} {iconik_weight_change up} {Bev. weight:\n [iconik_get_final_weight_text]}
+create_settings_button "default_off" 1080 30 1480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {iconik_weight_change down} {iconik_weight_change up} {[iconik_get_final_weight_text]}
 
 if {$::iconik_settings(show_grinder_settings_on_main_page) == 0} {
 	## Steam

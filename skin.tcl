@@ -433,11 +433,11 @@ proc iconik_get_final_weight_text {} {
 	set target [iconik_final_weight]
 
 	if {[::device::scale::is_connected]} {
-		set current "$::de1(scale_weight)g / $target g"
+		set current "Bev. weight:\n $::de1(scale_weight)g / $target g"
 	} elseif {[::device::scale::expecting_present]} {
-		set current "$target g"
+		set current "Bev. weight:\n $target g"
 	} else {
-		set current "$target ml"
+		set current "Bev. volume:\n $target ml"
 	}
 
 	return $current
