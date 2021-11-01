@@ -223,7 +223,7 @@ create_button "default_off" 2080 1440 2480 1560 $::font_tiny [::theme button_ter
 
 
 ## GHC buttons
-if {$::iconik_settings(show_ghc_buttons) == 1} {
+if {[ghc_required]} {
 	create_button "default_off" 2180 210 2480 390  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_espresso } {[ghc_text_or_stop "Espresso"]}
 	create_button "default_off" 2180 450 2480 630  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_water}     {[ghc_text_or_stop "Water"]}
 	create_button "default_off" 2180 690 2480 870  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_steam}     {[ghc_text_or_stop "Steam"]}
@@ -237,7 +237,7 @@ if {$::iconik_settings(show_ghc_buttons) == 1} {
 set espresso_graph_height 900
 set espresso_graph_width 1880
 
-if {$::iconik_settings(show_ghc_buttons) == 1} {
+if {[ghc_required]} {
 	set espresso_graph_width 1540
 }
 

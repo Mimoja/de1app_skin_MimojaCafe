@@ -12,6 +12,7 @@ namespace eval ::skin::mimojacafe::graph {}
 source "[skin_directory]/settings.tcl"
 
 iconik_load_settings
+set ::iconik_settings(show_ghc_buttons) {}
 iconik_save_settings
 
 set ::version_string "Version 1.7-$::iconik_settings(ui)"
@@ -47,7 +48,6 @@ source "[skin_directory]/interfaces/default_settings_screen.tcl"
 # Return from screensaver
 set_de1_screen_saver_directory [homedir]$::iconik_settings(saver_dir)
 add_de1_button "saver" {say [translate "wake"] $::settings(sound_button_in); iconik_wakeup} 0 0 2560 1600
-
 
 # Profile QuickSettings
 create_button "settings_1" 80 1460 200 1580  $::font_tiny [::theme button] [::theme button_text_light] {iconik_save_profile 1} "1"
