@@ -214,7 +214,7 @@ create_button "magadan_off" [expr {$b_btn_hpos_r - 1 * ($b_btn_width_tiny + $b_b
 create_button "magadan_off" [expr {$b_btn_hpos_r - 0 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 0 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); start_sleep } {\uf186}
 
 ## GHC buttons
-if {[ghc_required]} {
+if {![ghc_required]} {
 	create_button "magadan_off" 2180 210 2480 390  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_espresso } {[ghc_text_or_stop "Espresso"]}
 	create_button "magadan_off" 2180 450 2480 630  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_water}     {[ghc_text_or_stop "Water"]}
 	create_button "magadan_off" 2180 690 2480 870  $::font_tiny [::theme button_tertiary] [::theme button_text_light] { ghc_action_or_stop start_steam}     {[ghc_text_or_stop "Steam"]}
@@ -227,7 +227,7 @@ if {[ghc_required]} {
 set espresso_graph_height 910
 set espresso_graph_width [expr 2560 - 510 - 50]
 
-if {[ghc_required]} {
+if {![ghc_required]} {
 	set espresso_graph_width 1540
 }
 
