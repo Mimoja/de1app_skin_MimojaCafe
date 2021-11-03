@@ -2,11 +2,11 @@
 1280x800/splash.jpg
 2560x1600/icon.jpg
 2560x1600/splash.jpg
-"fonts/Font Awesome 5 Free-Solid-900.otf"
-"fonts/Mazzard Light.otf"
-"fonts/Mazzard Medium.otf"
-"fonts/Mazzard Regular.otf"
-"fonts/Mazzard SemiBold.otf"
+fonts/Font Awesome 5 Free-Solid-900.otf
+fonts/Mazzard Light.otf
+fonts/Mazzard Medium.otf
+fonts/Mazzard Regular.otf
+fonts/Mazzard SemiBold.otf
 framework.tcl
 interfaces/default_settings_screen.tcl
 interfaces/default_ui.tcl
