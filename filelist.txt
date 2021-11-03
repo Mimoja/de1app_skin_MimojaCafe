@@ -1,7 +1,7 @@
 skins/MimojaCafe/1280x800/icon.jpg
 skins/MimojaCafe/1280x800/splash.jpg
 skins/MimojaCafe/2560x1600/icon.jpg
-skins/MimojaCafe/1280x800/splash.jpg
+skins/MimojaCafe/2560x1600/splash.jpg
 skins/MimojaCafe/fonts/Font\ Awesome\ 5\ Free-Solid-900.otf
 skins/MimojaCafe/fonts/Mazzard\ Light.otf
 skins/MimojaCafe/fonts/Mazzard\ Medium.otf
