@@ -174,7 +174,7 @@ proc iconik_get_status_text {} {
 }
 
 proc show_DYE_page {} {
-    dui page load DYE current -theme MimojaCafe
+	plugins::DYE::open -which_shot default -theme MimojaCafe -coords {700 250} -anchor nw
 }
 
 proc iconik_status_tap {} {
