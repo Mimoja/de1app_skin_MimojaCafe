@@ -76,6 +76,18 @@ proc iconik_home {} {
 	::page_to_show_when_off "$::iconik_settings(ui)_off"
 }
 
+proc iconik_profile_title {slot} {
+	return [dict get $::iconik_settings(profiles) $slot title]
+}
+
+proc iconik_profile_label {slot} {
+	set title [iconik_profile_title $slot]
+	if {$slot == $::iconik_settings(main_profile_slot)} {
+		set title "> $title <" 
+	}
+	return $title
+}
+
 # We no longer have an off page
 ::add_de1_action "off" ::iconik_home
 
@@ -289,7 +301,6 @@ proc iconik_is_steam_chosen { slot } {
 	}
 }
 
-
 proc iconik_toggle_steam_settings {slot} {
 
 	set new_steam_timeout [dict get $::iconik_settings(steam_profiles) $slot timeout]
@@ -357,7 +368,7 @@ proc iconik_show_settings {} {
 	show_settings $::settings(settings_profile_type)
 }
 
-proc iconik_select_profile {} {
+proc iconik_open_profile_settings {} {
 	fill_profiles_listbox
 	show_settings settings_1;
 	set_profiles_scrollbar_dimensions
@@ -516,13 +527,20 @@ proc iconik_set_weight {target} {
 
 
 proc iconik_is_cleanup {} { return [ expr { $::iconik_settings(cleanup_profile) == $::settings(profile_filename) } ] }
+proc iconik_needs_reset {} { return [ expr { $::iconik_settings(reset_to_main_profile) &&\
+											 [ifexists ::iconik_settings(main_profile_slot)] != "" &&\
+											 [iconik_profile_title $::iconik_settings(main_profile_slot)] != [ifexists ::settings(original_profile_title)] } ] }
 
 proc iconik_before_espresso { old new } {
 	if { [iconik_is_cleanup] } { iconik_before_cleanup_profile }
 }
 
 proc iconik_after_espresso { old new } {
-	if { [iconik_is_cleanup] } { iconik_after_cleanup_profile }
+	if { [iconik_is_cleanup] } {
+		iconik_after_cleanup_profile
+	} elseif { [iconik_needs_reset] } {
+		iconik_toggle_profile $::iconik_settings(main_profile_slot)
+	}
 }
 
 proc iconik_before_cleanup_profile {} {

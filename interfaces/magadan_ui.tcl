@@ -28,10 +28,6 @@ proc iconik_expresso_temperature {} {
 	return "$temp °C$profile_changed_indicator"
 }
 
-proc iconik_profile_title {slot} {
-	return [dict get $::iconik_settings(profiles) $slot title]
-}
-
 proc iconik_steam_timeout {slot} {
 	return [dict get $::iconik_settings(steam_profiles) $slot timeout]
 }
@@ -130,9 +126,8 @@ create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 3 * ($l_btn
 # Grind Settings - 5,6
 create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 5 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 5 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] { set ::settings(grinder_dose_weight) [round_one_digits [expr {$::settings(grinder_dose_weight) - 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [round_one_digits  [expr {$::settings(grinder_dose_weight) + 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n $::settings(grinder_dose_weight) ([iconik_get_ratio_text])}
 ## Show clock
-create_button "magadan_off" [expr 2560 - 50 - $l_btn_width] $l_btn_top [expr 2560 - 50] [expr {$l_btn_top + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] {} { [time_format [clock seconds] 1]}
+create_button "magadan_off" [expr 2560 - 50 - $l_btn_width] $l_btn_top [expr 2560 - 50] [expr {$l_btn_top + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] {say [time_format [clock seconds] 1} { [time_format [clock seconds] 1]}
 create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 6 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 6 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light]  { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) - 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) + 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Grinder Setting:\n $::settings(grinder_setting)}
-
 
 # Recipe
 create_button_transparent "magadan_off" 510 $l_btn_top 720 [expr {$l_btn_top + ($l_btn_height)*3}] $::font_tiny [::theme background_text] { say [translate "settings"] $::settings(sound_button_in); iconik_show_settings} {[string range $::settings(profile_title) 0 40]}
@@ -179,13 +174,13 @@ set p_btn_height 160
 set p_btn_spacer 80
 
 ## coffee
-create_button "magadan_off" [expr {0 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {0 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 1} {[iconik_profile_title 1]}
+create_button "magadan_off" [expr {0 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {0 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 1} {[iconik_profile_label 1]}
 create_active_marker "magadan_off" [expr {0 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] [expr $p_btn_vpos - $p_btn_height / 2] [expr {0 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}]  {[iconik_is_coffee_chosen 1]}
-create_button "magadan_off" [expr {1 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {1 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 2} {[iconik_profile_title 2]}
+create_button "magadan_off" [expr {1 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {1 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 2} {[iconik_profile_label 2]}
 create_active_marker "magadan_off" [expr {1 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] [expr $p_btn_vpos - $p_btn_height / 2]  [expr {1 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] {[iconik_is_coffee_chosen 2]}
-create_button "magadan_off" [expr {2 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {2 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 3} {[iconik_profile_title 3]}
+create_button "magadan_off" [expr {2 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {2 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 3} {[iconik_profile_label 3]}
 create_active_marker "magadan_off" [expr {2 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] [expr $p_btn_vpos - $p_btn_height / 2]  [expr {2 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] {[iconik_is_coffee_chosen 3]}
-create_button "magadan_off" [expr {3 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {3 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 4} {[iconik_profile_title 4]}
+create_button "magadan_off" [expr {3 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] $p_btn_vpos [expr {3 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] $::font_tiny [::theme button_coffee] [::theme button_text_light] {iconik_toggle_profile 4} {[iconik_profile_label 4]}
 create_active_marker "magadan_off" [expr {3 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos}] [expr $p_btn_vpos - $p_btn_height / 2]  [expr {3 * ($p_btn_spacer + $p_btn_width) + $p_btn_hpos + $p_btn_width}] [expr {$p_btn_vpos + $p_btn_height}] {[iconik_is_coffee_chosen 4]}
 
 ## Bottom buttons
@@ -209,7 +204,7 @@ create_button "magadan_off" [expr {$b_btn_hpos_r - 3 * ($b_btn_width_tiny + $b_b
 # Skin Settings
 create_button "magadan_off" [expr {$b_btn_hpos_r - 2 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 2 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); page_to_show_when_off "iconik_settings" } {\uf141}
 # DE1 Settings
-create_button "magadan_off" [expr {$b_btn_hpos_r - 1 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 1 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_select_profile } {\uf013}
+create_button "magadan_off" [expr {$b_btn_hpos_r - 1 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 1 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_open_profile_settings } {\uf013}
 # Sleep
 create_button "magadan_off" [expr {$b_btn_hpos_r - 0 * ($b_btn_width_tiny + $b_btn_spacer) - $b_btn_width_tiny}] $b_btn_vpos [expr {$b_btn_hpos_r - 0 * ($b_btn_width_tiny + $b_btn_spacer)}] [expr {$b_btn_vpos + $b_btn_height}] $::font_big_icon [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); start_sleep } {\uf186}
 
