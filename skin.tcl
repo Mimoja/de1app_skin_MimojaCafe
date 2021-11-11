@@ -74,6 +74,7 @@ create_grid
 
 proc iconik_home {} {
 	::page_to_show_when_off "$::iconik_settings(ui)_off"
+	restore_espresso_chart
 }
 
 proc iconik_profile_title {slot} {
@@ -536,10 +537,12 @@ proc iconik_before_espresso { old new } {
 }
 
 proc iconik_after_espresso { old new } {
+	backup_espresso_chart
 	if { [iconik_is_cleanup] } {
 		iconik_after_cleanup_profile
 	} elseif { [iconik_needs_reset] } {
 		iconik_toggle_profile $::iconik_settings(main_profile_slot)
+		restore_espresso_chart
 	}
 }
 
