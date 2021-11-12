@@ -83,7 +83,7 @@ proc iconik_profile_title {slot} {
 
 proc iconik_profile_label {slot} {
 	set title [iconik_profile_title $slot]
-	if {$slot == $::iconik_settings(main_profile_slot)} {
+	if {$::iconik_settings(reset_to_main_profile) && $slot == $::iconik_settings(main_profile_slot)} {
 		set title "> $title <" 
 	}
 	return $title
