@@ -5,16 +5,22 @@ proc init_MimojaCafe_dui_theme {} {
 	
 	set disabled_colour "#35363d"
 	set default_font_size 15
+
+#	dialog_page.bg_shape round_outline
+#	dialog_page.bg_color [::theme button]
+#	dialog_page.fill [::theme button]
+#	dialog_page.outline [::theme background_text]
+#	dialog_page.width 1
 	
 	dui aspect set [subst {
 		page.bg_img {}
 		page.bg_color [::theme background]
 
 		dialog_page.bg_shape round_outline
-		dialog_page.bg_color [::theme button]
-		dialog_page.fill [::theme button]
+		dialog_page.bg_color [::theme background]
+		dialog_page.fill [::theme background]
 		dialog_page.outline [::theme background_text]
-		dialog_page.width 1
+		dialog_page.width 4
 		
 		font.font_family "Mazzard Regular"
 		font.font_size $default_font_size
@@ -216,6 +222,7 @@ proc init_MimojaCafe_dui_theme {} {
 		graph.plotpadx 10
 		
 		text.bg [::theme background]
+		text.foreground [::theme background_text]
 		text.font_size 16
 		text.relief flat
 		text.highlightthickness 1
@@ -254,7 +261,7 @@ proc init_MimojaCafe_dui_theme {} {
 		dtext.font_size.menu_dlg_title +1
 		dtext.anchor.menu_dlg_title center
 		dtext.justify.menu_dlg_title center
-		dtext.fill.menu_dlg_title [::theme button_text_light]
+		dtext.fill.menu_dlg_title [::theme background_text]
 		
 		dbutton.shape.menu_dlg_close rect 
 		dbutton.fill.menu_dlg_close {} 
@@ -262,14 +269,14 @@ proc init_MimojaCafe_dui_theme {} {
 		dbutton_symbol.pos.menu_dlg_close {0.5 0.5}
 		dbutton_symbol.anchor.menu_dlg_close center
 		dbutton_symbol.justify.menu_dlg_close center
-		dbutton_symbol.fill.menu_dlg_close [::theme button_text_light]
+		dbutton_symbol.fill.menu_dlg_close [::theme primary_dark]
 		
 		dbutton.shape.menu_dlg_btn rect
 		dbutton.fill.menu_dlg_btn {}
 		dbutton.disabledfill.menu_dlg_btn {}
 		dbutton_label.pos.menu_dlg_btn {0.25 0.4} 
 		dbutton_label.anchor.menu_dlg_btn w
-		dbutton_label.fill.menu_dlg_btn [::theme button_text_light]
+		dbutton_label.fill.menu_dlg_btn [::theme background_text]
 		dbutton_label.disabledfill.menu_dlg_btn $disabled_colour
 		
 		dbutton_label1.pos.menu_dlg_btn {0.25 0.78} 
@@ -280,17 +287,17 @@ proc init_MimojaCafe_dui_theme {} {
 		
 		dbutton_symbol.pos.menu_dlg_btn {0.15 0.5} 
 		dbutton_symbol.anchor.menu_dlg_btn center
-		dbutton_symbol.fill.menu_dlg_btn [::theme button_text_light]
+		dbutton_symbol.fill.menu_dlg_btn [::theme primary_dark]
 		dbutton_symbol.disabledfill.menu_dlg_btn $disabled_colour
 		
 		line.fill.menu_dlg_sepline #ddd
 		line.width.menu_dlg_sepline 1
 		
-		dtext.fill.menu_dlg [::theme button_text_light]
+		dtext.fill.menu_dlg [::theme background_text]
 		dtext.disabledfill.menu_dlg $disabled_colour
-		dcheckbox.fill.menu_dlg [::theme button_text_light]
+		dcheckbox.fill.menu_dlg [::theme background_text]
 		dcheckbox.disabledfill.menu_dlg $disabled_colour
-		dcheckbox_label.fill.menu_dlg [::theme button_text_light]
+		dcheckbox_label.fill.menu_dlg [::theme background_text]
 		dcheckbox_label.disabledfill.menu_dlg $disabled_colour
 		
 		dbutton.shape.menu_dlg round
