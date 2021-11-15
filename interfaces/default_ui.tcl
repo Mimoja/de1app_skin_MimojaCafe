@@ -83,7 +83,9 @@ proc restore_profile {} {
 	}
 }
 
+
 add_background "default_off"
+dui page add mc_graph_overlay -namespace ::skin::mimojacafe::mc_graph_overlay -type dialog -bbox {100 100 2460 1500}
 
 # Water level indicator
 if {$::iconik_settings(show_water_level_indicator) == 1} {
@@ -239,7 +241,8 @@ if {![ghc_required]} {
 if {$::iconik_settings(show_steam) == 1} {
 	set espresso_graph_height 600
 }
-add_de1_widget "default_off" graph 580 230 {
+
+add_de1_widget default_off graph 580 230 {
 
 	set ::skin::mimojacafe::graph::espresso_default $widget
 
@@ -308,6 +311,9 @@ add_de1_widget "default_off" graph 580 230 {
 	
 	# show the explanation for flow
 	$widget element create line_espresso_flow_explanation -xdata espresso_de1_explanation_chart_elapsed -ydata espresso_de1_explanation_chart_flow -mapy $flow_axis  -label "" -linewidth [rescale_x_skin 18] -color [::theme secondary]  -smooth $::settings(preview_graph_smoothing_technique) -pixels 0;
+
+	# launch the graph overlay dialog when the graph is clicked
+	bind $widget [dui::platform::button_press] [list dui::page::open_dialog mc_graph_overlay]
 	
 } -plotbackground [::theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin $espresso_graph_height] -borderwidth 1 -background [::theme background] -plotrelief flat -plotpady 0 -plotpadx 10
 
@@ -329,4 +335,64 @@ if {$::iconik_settings(show_steam) == 1} {
 		$widget axis configure y -color [::theme background_text] -tickfont Helv_6 -min 0 -max 4 -subdivisions 5 -majorticks {1 2 3 4}
 
 	} -plotbackground [::theme background] -width [rescale_x_skin $espresso_graph_width] -height [rescale_y_skin 300] -borderwidth 1 -background [::theme background] -plotrelief flat
+}
+
+## Graph dialog overlay page
+namespace eval ::skin::mimojacafe::mc_graph_overlay {
+	variable widgets
+	array set widgets {}
+		
+	variable data
+	array set data {
+		original_bbox {}
+	}
+	
+	proc setup {} {
+		variable data
+		variable widgets
+		set page [namespace tail [namespace current]]
+		set page_width [dui page width $page 0]
+
+		dui add dbutton $page [expr {$page_width-120}] 0 $page_width 120 -tags close_dialog -style menu_dlg_close \
+			-command dui::page::close_dialog
+	}
+	
+	proc load { page_to_hide page_to_show args } {
+		variable data
+		
+		# Store the graph original location & dimensions, so they can be restored when the dialog is closed.		
+		# These are on current screen resolution
+		set graph $::skin::mimojacafe::graph::espresso_default
+		set data(original_bbox) [[dui canvas] bbox $graph]
+		
+		return 1
+	}
+	
+	proc show { page_to_hide page_to_show } {
+		variable data
+		set can [dui canvas]
+		set graph $::skin::mimojacafe::graph::espresso_default
+		
+		# Current dialog page location & dimensions, on base 2560x1800 resolution
+		set page_bbox [dui page bbox $page_to_show]
+		
+		# Show the graph widget, move and resize it with a padding relative to the page size. Only need to change
+		# the dialog page size on the 'dui page add' command, and the padding here. 
+		$can itemconfigure $graph -state normal
+		$can coords $graph [dui::platform::rescale_x [expr {[lindex $page_bbox 0]+50}]] \
+			[dui::platform::rescale_y [expr {[lindex $page_bbox 1]+150}]]
+		$graph configure -width [dui::platform::rescale_x [expr {[lindex $page_bbox 2]-[lindex $page_bbox 0]-100}]]
+		$graph configure -height [dui::platform::rescale_x [expr {[lindex $page_bbox 3]-[lindex $page_bbox 1]-200}]]
+	}
+
+	proc hide { page_to_hide page_to_show } {
+		variable data
+		set can [dui canvas]
+		set graph $::skin::mimojacafe::graph::espresso_default
+		
+		# Revert the graph to its original position and size
+		$can coords $graph [lindex $data(original_bbox) 0] [lindex $data(original_bbox) 1]
+		$graph configure -width [expr {[lindex $data(original_bbox) 2]-[lindex $data(original_bbox) 0]}]
+		$graph configure -height [expr {[lindex $data(original_bbox) 3]-[lindex $data(original_bbox) 1]}]
+	}
 }
