@@ -151,6 +151,7 @@ array set ::iconik_settings {
     create_profile_backups 0
     show_grid_lines 1
     show_steam_grid_lines 1
+    show_resistance 1
 
     saver_dir {/saver}
 

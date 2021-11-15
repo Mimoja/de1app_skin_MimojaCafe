@@ -250,6 +250,10 @@ add_de1_widget "magadan_off" graph 510 280 {
 		set flow_axis y2
 	}
 
+	if {$::iconik_settings(show_resistance) == 1} {
+		$widget element create line_espresso_resistance  -xdata espresso_elapsed -ydata espresso_resistance_weight -symbol none -label "" -linewidth [rescale_x_skin 4] -color #e5e500 -smooth $::settings(live_graph_smoothing_technique) -pixels 0  
+	}
+
 	if {$::iconik_settings(always_show_temperatures)} {
 		$widget axis create temp
 		$widget axis configure temp -color [::theme background_text] -min 0.0 -max [expr {$::iconik_settings(y_axis_scale) * 10}]
