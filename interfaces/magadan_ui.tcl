@@ -301,7 +301,7 @@ add_de1_widget "magadan_off" graph 510 280 {
 
 
 if {$::iconik_settings(show_steam) == 1} {
-	add_de1_widget "magadan_off" graph 580 830 {
+	add_de1_widget "magadan_off" graph 510 830 {
 
 		set ::skin::mimojacafe::graph::steam_magadan $widget
 
