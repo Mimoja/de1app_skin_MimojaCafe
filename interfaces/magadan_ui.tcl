@@ -132,8 +132,9 @@ create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 6 * ($l_btn
 # Title, former Recipe
 dui add dbutton magadan_off 510 $l_btn_top -bwidth 390 -bheight $l_btn_height -shape round -radius 30 \
 			-tags iconik_magadan_launch_dye_profile_selector -fill [::theme background] \
-			-labelvariable {[string range $::settings(profile_title) 0 28]} -label_font_size 16 \
-			-label_fill [::theme background_text]  -label_pos {0.5 0.25} \
+			-labeltext {[string range $::settings(profile_title) 0 36]} -label_font_size 16 \
+			-label_fill [::theme background_text]  -label_pos {0.5 0.25} -label_wrap word\
+			-label_width 380 \
 			-label_font_family "Mazzard Regular" -command [list plugins::DYE::open_profile_tools select]
 
 

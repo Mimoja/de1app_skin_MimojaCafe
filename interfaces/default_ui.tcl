@@ -130,9 +130,10 @@ if {$::iconik_settings(show_grinder_settings_on_main_page) == 0} {
 # Recipe
 rounded_rectangle "default_off" 80 210 480 1110 [rescale_x_skin 80] [::theme button]
 
-dui add dbutton default_off 80 220 -bwidth 400 -bheight 120 -shape round -radius 30 \
+dui add dbutton default_off 80 220 -bwidth 400 -bheight 130 -shape round -radius 30 \
 			-tags iconik_default_launch_dye_profile_selector -fill [::theme button] \
-			-labelvariable {[string range $::settings(profile_title) 0 28]} -label_font_size 18 \
+			-labelvariable {[string range $::settings(profile_title) 0 50]} -label_font_size 18 \
+			-label_width 380 \
 			-label_font_family "Mazzard Regular" -command [list plugins::DYE::open_profile_tools select]
 
 
