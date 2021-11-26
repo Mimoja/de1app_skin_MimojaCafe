@@ -371,7 +371,7 @@ proc iconik_show_settings {} {
 
 proc iconik_open_profile_settings {} {
 	fill_profiles_listbox
-	show_settings settings_1;
+	show_settings settings_2;
 	set_profiles_scrollbar_dimensions
 }
 
