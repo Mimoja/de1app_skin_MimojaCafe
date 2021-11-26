@@ -129,8 +129,13 @@ create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 5 * ($l_btn
 create_button "magadan_off" [expr 2560 - 50 - $l_btn_width] $l_btn_top [expr 2560 - 50] [expr {$l_btn_top + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light] {say [time_format [clock seconds] 1} { [time_format [clock seconds] 1]}
 create_settings_button "magadan_off" $l_btn_left [expr {$l_btn_top + 6 * ($l_btn_height + $l_btn_spacer)}] [expr {$l_btn_left + $l_btn_width}] [expr {$l_btn_top + 6 * ($l_btn_height + $l_btn_spacer) + $l_btn_height}] $::font_tiny [::theme button_secondary] [::theme button_text_light]  { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) - 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) + 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Grinder Setting:\n $::settings(grinder_setting)}
 
-# Recipe
-create_button_transparent "magadan_off" 510 $l_btn_top 720 [expr {$l_btn_top + ($l_btn_height)*3}] $::font_tiny [::theme background_text] { say [translate "settings"] $::settings(sound_button_in); iconik_show_settings} {[string range $::settings(profile_title) 0 40]}
+# Title, former Recipe
+dui add dbutton magadan_off 510 $l_btn_top -bwidth 390 -bheight $l_btn_height -shape round -radius 30 \
+			-tags iconik_magadan_launch_dye_profile_selector -fill [::theme background] \
+			-labelvariable {[string range $::settings(profile_title) 0 28]} -label_font_size 16 \
+			-label_fill [::theme background_text]  -label_pos {0.5 0.25} \
+			-label_font_family "Mazzard Regular" -command [list plugins::DYE::open_profile_tools select]
+
 
 ### TIME
 set column1_pos  910
