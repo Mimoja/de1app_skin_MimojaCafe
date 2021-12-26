@@ -110,6 +110,30 @@ array set ::cocoa_theme {
     button_text_dark "#969eb1"
 }
 
+array set ::rainforest_theme {
+    background "#FFFFFF"
+    background_highlight "#EEEEEE"
+    background_text "#414A91"
+
+    primary "#2a9d8f"
+    primary_light "#2a9d8f"
+    primary_dark "#264653"
+
+    secondary "#e9c46a"
+    secondary_light "#f4a261"
+
+    button "#28535c"
+    button_coffee "#28535c"
+    button_steam "#28535c"
+    button_secondary "#758b81"
+    button_tertiary "#28535c"
+
+    button_text_light "#FFFFFF"
+    button_text_dark "#969eb1"
+
+    background_image "coffee_beans.jpg"
+}
+
 # fonts
 set ::font_tiniest [get_font "Mazzard Regular" 13]
 set ::font_tinier [get_font "Mazzard Regular" 15]
@@ -168,7 +192,7 @@ array set ::iconik_settings {
 
 proc ::theme {cntx} {
     set theme_name $::iconik_settings(theme)
-    return [set ${theme_name}($cntx)]
+    return [ifexists ${theme_name}($cntx)]
 }
 
 

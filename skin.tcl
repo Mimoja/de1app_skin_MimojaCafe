@@ -36,6 +36,15 @@ catch {
 		dui page load DYE current -theme MimojaCafe
 	}
 }
+
+if {[::theme background_image] != "" } {
+	set ::iconik_transparent_theme 1
+	dui add image_dirs "[skin_directory]/backgrounds"
+} else {
+	set ::iconik_transparent_theme 0
+}
+
+
 source "[skin_directory]/interfaces/default_ui.tcl"
 source "[skin_directory]/interfaces/magadan_ui.tcl"
 

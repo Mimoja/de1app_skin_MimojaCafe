@@ -2,7 +2,18 @@
 # Functions for creating the Metric menu framework
 
 proc add_background { contexts } {
-	set background_id [.can create rect 0 0 [rescale_x_skin 2560] [rescale_y_skin 1600] -fill [::theme background] -width 0 -state "hidden"]
+	if {$::iconik_transparent_theme} {
+		set fn [dui::image::find [::theme background_image]]
+
+		if {$fn == "" || ![file exists $fn]} {
+			error "[::theme background_image] does not exist. Using default wallpaper"
+		}
+		image create photo iconik_background -file $fn 
+		set background_id [.can create image {0 0} -anchor nw -image iconik_background -tag iconik_background -state normal]
+	
+	} else {
+		set background_id [.can create rect 0 0 [rescale_x_skin 2560] [rescale_y_skin 1600] -fill [::theme background] -width 0 -state "hidden"]
+	}
 	add_visual_items_to_contexts $contexts $background_id
 }
 
@@ -60,6 +71,9 @@ proc add_visual_items_to_contexts { contexts tags } {
 }
 
 proc rectangle {contexts x1 y1 x2 y2 colour } {
+	if {$::iconik_transparent_theme} {
+		return
+	}
 	set x1 [rescale_x_skin $x1] 
 	set y1 [rescale_y_skin $y1] 
 	set x2 [rescale_x_skin $x2] 

@@ -11,6 +11,8 @@ framework.tcl
 interfaces/default_settings_screen.tcl
 interfaces/default_ui.tcl
 interfaces/magadan_ui.tcl
+backgrounds/2560x1600/coffee_beans.jpg
+backgrounds/1280x800/coffee_beans.jpg
 settings.tcl
 theme.tcl
 skin.tcl
