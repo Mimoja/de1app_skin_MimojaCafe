@@ -259,6 +259,7 @@ proc iconik_temperature_adjust {up} {
 				set step_array(temperature) [round_to_one_digits [expr {$step_array(temperature) - 0.5}]]
 			}
 			lappend new_profile [array get step_array]
+			unset -nocomplain step_array
 		}
 		set ::settings(advanced_shot) $new_profile
 		array set ::current_adv_step [lindex $::settings(advanced_shot) 0]
