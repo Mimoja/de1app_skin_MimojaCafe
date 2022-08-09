@@ -121,7 +121,7 @@ if {$::iconik_settings(show_grinder_settings_on_main_page) == 0} {
 	create_settings_button "default_off" 1580 30 1980 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] { set ::settings(grinder_dose_weight)  [round_one_digits [expr {$::settings(grinder_dose_weight) - 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_dose_weight) [round_one_digits [expr {$::settings(grinder_dose_weight) + 0.5}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Dose:\n [round_one_digits $::settings(grinder_dose_weight)] ([iconik_get_ratio_text])}
 	if {$::iconik_settings(show_clock_on_main_page) == 1} {
 		## Show clock
-		create_button "default_off" 2080 30 2480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {say [time_format [clock seconds] 1} { [time_format [clock seconds] 1]}
+		create_button "default_off" 2080 30 2480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light] {say [time_format [clock seconds] 1]} { [time_format [clock seconds] 1]}
 	} else {
 		create_settings_button "default_off" 2080 30 2480 150 $::font_tiny [::theme button_secondary] [::theme button_text_light]  { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) - 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} { set ::settings(grinder_setting) [round_to_one_digits [expr {$::settings(grinder_setting) + 0.1}]]; profile_has_changed_set; save_profile; save_settings_to_de1; save_settings} {Grinder Setting:\n $::settings(grinder_setting)}
 	}
