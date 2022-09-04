@@ -211,6 +211,10 @@ proc iconik_array_to_file {arrname fn} {
 }
 
 proc iconik_save_settings {} {
+
+    set ::settings(flush_seconds) [round_to_integer [expr $::iconik_settings(flush_timeout) + 1]]
+    set_flush_timeout $::settings(flush_seconds)
+
     iconik_array_to_file ::iconik_settings [iconik_settings_filename]
 }
 
