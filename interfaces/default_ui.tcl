@@ -217,7 +217,7 @@ rectangle "default_off" 0 1410 2560 1600 [::theme background_highlight]
 
 ## Status and MISC buttons
 create_button "default_off" 80 1440 480 1560    $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_status_tap } {[iconik_get_status_text]}
-create_button "default_off" 580 1440 980 1560   $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_DYE_page} {[translate "Describe"]}
+create_button "default_off" 580 1440 980 1560   $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); show_DYE_page} {[iconik_get_describe_text]}
 
 create_button "default_off" 1080 1440 1480 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_toggle_cleaning } { [translate "Clean"]} 
 create_button "default_off" 1580 1440 1980 1560 $::font_tiny [::theme button_tertiary] [::theme button_text_light] { say [translate "settings"] $::settings(sound_button_in); iconik_open_profile_settings } {[translate "Settings"]}
