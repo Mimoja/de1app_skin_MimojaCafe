@@ -206,9 +206,7 @@ proc iconik_status_tap {} {
 
 	if {$::de1_num_state($::de1(state)) == "Espresso"} {
 		start_next_step
-	}
-
-	if {[::device::scale::is_connected]} {
+	} elseif {[::device::scale::is_connected]} {
 		::device::scale::tare
 	}
 }
