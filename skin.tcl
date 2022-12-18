@@ -28,11 +28,10 @@ proc iconik_wakeup {} {
 catch {
 	package require sqlite3
 
-	if { [plugins available DYE] } {
+	if { [plugins enabled DYE] } {
 		if { [plugins available SDB] } {
 			plugins enable SDB
 		}
-		plugins enable DYE
 		dui page load DYE current -theme MimojaCafe
 	}
 }
@@ -195,8 +194,20 @@ proc iconik_get_status_text {} {
 
 }
 
+proc iconik_get_describe_text {} {
+	if { [plugins enabled DYE] } {
+		return [translate "Describe"]
+	} else {
+		return [translate "History"]
+	}
+}
+
 proc show_DYE_page {} {
-	plugins::DYE::open -which_shot default -theme MimojaCafe -coords {700 250} -anchor nw
+	if { [plugins enabled DYE] } {
+		plugins::DYE::open -which_shot default -theme MimojaCafe -coords {700 250} -anchor nw
+	} else {
+		history_viewer open
+	}
 }
 
 proc iconik_status_tap {} {
