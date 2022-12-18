@@ -160,7 +160,7 @@ proc iconik_get_status_text {} {
 		}
 		0 {
 			if {[::device::scale::is_connected]} {
-				return [translate "Ready\nScale connected"]
+				return [translate "Ready\nTap to tare scale"]
 			}
 
 			return [translate "Ready"]
@@ -206,6 +206,10 @@ proc iconik_status_tap {} {
 
 	if {$::de1_num_state($::de1(state)) == "Espresso"} {
 		start_next_step
+	}
+
+	if {[::device::scale::is_connected]} {
+		::device::scale::tare
 	}
 }
 
