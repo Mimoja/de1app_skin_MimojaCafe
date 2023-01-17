@@ -229,7 +229,7 @@ proc ghc_text_or_stop {text} {
 	if { $::de1(substate) > 1} {
 		return [translate Stop]
 	}
-	return $text
+	return [translate $text]
 }
 
 proc ghc_action_or_stop {action} {
