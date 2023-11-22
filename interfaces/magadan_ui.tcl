@@ -86,10 +86,10 @@ proc restore_profile {} {
 add_background "magadan_off"
 
 # Water level indicator
-if {$::iconik_settings(show_water_level_indicator) == 1} {
+#if {$::iconik_settings(show_water_level_indicator) == 1} {
 	# water level sensor
-	add_de1_widget "magadan_off" scale 0 0 {after 1000 water_level_color_check $widget} -from 40 -to 5 -background [::theme primary] -foreground [::theme secondary] -borderwidth 1 -bigincrement .1 -resolution .1 -length [rescale_x_skin 1600] -showvalue 0 -width [rescale_y_skin 16] -variable ::de1(water_level) -state disabled -sliderrelief flat -font Helv_10_bold -sliderlength [rescale_x_skin 50] -relief flat -troughcolor [::theme background] -borderwidth 0  -highlightthickness 0
-}
+	# add_de1_widget "magadan_off" scale 0 0 {after 1000 water_level_color_check $widget} -from 50 -to 10 -background [::theme primary] -foreground [::theme secondary] -borderwidth 1 -bigincrement .1 -resolution .1 -length [rescale_x_skin 1600] -showvalue 0 -width [rescale_y_skin 16] -variable ::mc_water_level -state disabled -sliderrelief flat -font Helv_10_bold -sliderlength [rescale_x_skin 50] -relief flat -troughcolor [::theme background] -borderwidth 0  -highlightthickness 0
+#}
 
 # Upper buttons
 ## Background

@@ -88,9 +88,14 @@ add_background "default_off"
 dui page add mc_graph_overlay -namespace ::skin::mimojacafe::mc_graph_overlay -type dialog -bbox {100 100 2460 1500}
 
 # Water level indicator
+proc mc_water_level_update {} {
+    set ::mc_water_level $::de1(water_level)
+}
+add_de1_variable "default_off magadan_off" 0 0 -anchor e -font $::font_tiny -fill [::theme button_text_dark] -textvariable {[mc_water_level_update]}
+
+set ::mc_water_level 10
 if {$::iconik_settings(show_water_level_indicator) == 1} {
-	# water level sensor
-	add_de1_widget "default_off" scale 0 0 {after 1000 water_level_color_check $widget} -from 40 -to 5 -background [::theme primary] -foreground [::theme secondary] -borderwidth 1 -bigincrement .1 -resolution .1 -length [rescale_x_skin 1600] -showvalue 0 -width [rescale_y_skin 16] -variable ::de1(water_level) -state disabled -sliderrelief flat -font Helv_10_bold -sliderlength [rescale_x_skin 50] -relief flat -troughcolor [::theme background] -borderwidth 0  -highlightthickness 0
+	add_de1_widget "default_off magadan_off" scale 0 0 {after 1000 water_level_color_check $widget} -from 50 -to 10 -background [::theme primary] -foreground [::theme secondary] -borderwidth 1 -bigincrement .1 -resolution .1 -length [rescale_x_skin 1600] -showvalue 0 -width [rescale_y_skin 16] -variable ::mc_water_level -state disabled -sliderrelief flat -font Helv_10_bold -sliderlength [rescale_x_skin 50] -relief flat -troughcolor [::theme background] -borderwidth 0  -highlightthickness 0
 }
 
 
