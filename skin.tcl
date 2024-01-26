@@ -478,6 +478,14 @@ proc iconik_get_final_weight_text {} {
 	return $current
 }
 
+proc iconik_get_dose_from_weight {} {
+	if {[::device::scale::is_connected]} {
+		return$::de1(scale_weight)
+	}
+
+	return $::settings(grinder_dose_weight)
+}
+
 proc iconik_weight_change {direction} {
 
 	set change 0
